@@ -1,26 +1,30 @@
 import React from 'react'
+import "../styling/About.css"
 
 function About() {
   return (
     <>
       <main>
-        <header>
+        <header className="about-header">
           <h1>Why FindMyLang</h1>
         </header>
-        <section>
+        <section className="about-content">
           <p>
-            FindMyLang was created for users in need of better help! 
+            FindMyLang was created for users in need of better help 
             while visiting retail locations.
           </p>
           <p>
-          With our database a user can simply
+          With our app you can simply
             type a store name, the language of their choice
-            and a zipcode, And get a response with the stores
-            in their area that fit the criteria.
+            and a zipcode, And get a list of stores
+            in your area that fit the criteria.
           </p>
-            Our user will see nearby locations that
-            have representatives that speak the language they selected
+          <p>
+          You will see nearby locations that
+            have representatives that speak the language you selected
             along with their names and availability.
+          </p>
+          
           <p>
             Enjoy!
           </p>

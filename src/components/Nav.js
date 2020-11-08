@@ -8,7 +8,7 @@ function Nav() {
       
         <nav className="Nav">
         
-            <Link to='/home'>
+            <Link to='/'>
               <h3>Home</h3>
             </Link>
 

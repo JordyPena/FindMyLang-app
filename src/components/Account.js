@@ -1,35 +1,40 @@
-import React from 'react';
+import React from "react";
 import "../styling/Account.css";
 
 function Account() {
   return (
     <>
-      <section>
-        <h3>Username</h3>
-        <button>Logout</button>
+      <section className="username">
+        <p>Username</p>
+        <p>LogOut</p>
       </section>
-
-      
 
       <section className="favorites">
-      <p>Favorites</p>
-      <button>Add new fav</button>
-        <ul className="list">
-          <li>Favorites</li>
-          <button>Delete</button>
+        <p>Favorites</p>
+        <div className="list">
+          <ul>
+            <li>Favorites</li>
+            <p>This will display store name 
+              and address
+            </p>
+            <button>Delete</button>
 
-          <li>Favorites</li>
-          <button>Delete</button>
+            <li>Favorites</li>
+            <p>This will display store name 
+              and address
+            </p>
+            <button>Delete</button>
 
-          <li>Favorites</li>
-          <button>Delete</button>
-        </ul>
-        
+            <li>Favorites</li>
+             <p>This will display store name 
+              and address
+            </p>
+            <button>Delete</button>
+          </ul>
+        </div>
       </section>
     </>
-  )
+  );
 }
 
-export default Account
-
-  
+export default Account;

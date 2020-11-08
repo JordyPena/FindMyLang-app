@@ -4,40 +4,37 @@ import "../styling/LandingPage.css"
 function LandingPage() {
   return (
     <>
-      <main>
+      <div className="landingPage-content"> 
         <header>
           <h1>LandingPage</h1>
         </header>
 
         <section>
+          <div className="welcome">
           <h3>Welcome</h3>
           <p>
-            Hi, this app allows you to search for business in your area with
+            Hi, this app allows you to search for businesses in your area with
             employees who speak a language you requested.
           </p>
+          </div>
+          
         </section>
 
         <section>
-          <h3>How to use</h3>
+         <div>
+         <h3>How to use</h3>
           <p>
-            In the searchbar input the stores name you desire,
+            In the searchbar, input the stores name you desire,
             language you require and your zipcode.
             That will return any results that fit your criteria.
           </p>
           <p>
-            Create a account to save frequented stores to your favorites.
+            Create an account to save frequented stores to your favorites.
           </p>
-        </section>
-
-        <section>
-          <h3>New user?</h3>
-          <button>Sign up</button>
-
-          <h3>Already have an account!</h3>
-          <button>Log in</button>
+         </div>
         </section>
         
-      </main>
+      </div>
     </>
   );
 }

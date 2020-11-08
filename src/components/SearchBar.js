@@ -32,7 +32,7 @@ class SearchBar extends Component {
       />
       <input
         
-        type="number"
+        type="text"
         placeholder="Zipcode"
         name="Zipcode"
         value=""

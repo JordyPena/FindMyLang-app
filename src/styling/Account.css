@@ -4,6 +4,11 @@
   justify-content: center;
 }
 
-.list {
+.list ul {
   list-style-type: none;
+}
+
+.username p {
+  display: flex;
+  justify-content: center;
 }

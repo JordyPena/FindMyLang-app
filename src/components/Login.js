@@ -1,23 +1,19 @@
-import React, { Component } from 'react'
-import "../styling/Login.css"
+import React, { Component } from "react";
+import "../styling/Login.css";
 
 class Login extends Component {
   constructor(props) {
-    super(props)
+    super(props);
 
-    this.state = {
-      
-    }
+    this.state = {};
   }
 
   render() {
     return (
       <>
-        <form
-          className="login-bar">
-          <label>
-            Log In
-          </label>
+        <form className="login-content">
+          <div className="login"> 
+          <label>Log In</label>
           <input
             type="text"
             name="email"
@@ -25,9 +21,9 @@ class Login extends Component {
             onChange=""
             placeholder="Email"
           />
-          <label>
-            Password
-          </label>
+          </div>
+          <div>
+          <label>Password</label>
           <input
             type="text"
             name="password"
@@ -35,16 +31,15 @@ class Login extends Component {
             onChange=""
             placeholder="Password"
           />
-          <button
-            className="login-button"
-            type="submit"
-          >
+         
+          </div>
+          <button className="login-button" type="submit">
             Login
           </button>
         </form>
       </>
-    )
+    );
   }
 }
 
-export default Login
+export default Login;
