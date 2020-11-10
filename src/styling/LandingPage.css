@@ -29,10 +29,11 @@ p {
   max-width: 650px;
 }
 
-.landingPage-content {
+.landingPage-content p {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  margin-bottom: 1rem;
 }
 
 .welcome {

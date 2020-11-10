@@ -1,5 +1,5 @@
-import React from 'react'
-import "../styling/About.css"
+import React from "react";
+import "../styling/About.css";
 
 function About() {
   return (
@@ -10,30 +10,22 @@ function About() {
         </header>
         <section className="about-content">
           <p>
-            FindMyLang was created for users in need of better help 
-            while visiting retail locations.
+            At T-mobile we want to make sure you get the best customer
+            experience as possible. Because of that we want you to be able to
+            find a store that speaks the language you speak in the Dallas area.
           </p>
           <p>
-          With our app you can simply
-            type a store name, the language of their choice
-            and a zipcode, And get a list of stores
-            in your area that fit the criteria.
+            With our app you can simply select the language of your choice And
+            you'll get a list of stores in the Dallas area that match the
+            language you selected.
           </p>
-          <p>
-          You will see nearby locations that
-            have representatives that speak the language you selected
-            along with their names and availability.
-          </p>
-          
           <p>
             Enjoy!
           </p>
         </section>
       </main>
     </>
-  )
+  );
 }
 
-export default About
-
-  
+export default About;
