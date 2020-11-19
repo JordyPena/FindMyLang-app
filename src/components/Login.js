@@ -1,42 +1,95 @@
 import React, { Component } from "react";
-import "../styling/Login.css";
+
+
+const URL =
+  process.env.NODE_ENV === "production"
+    ? process.env.REACT_APP_PROD_URL
+    : "http://localhost:9000";
 
 class Login extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {};
+    this.state = {
+      username: "",
+      password: "",
+      loginErrors: "",
+    };
   }
 
+  handleChange = (event) => {
+    this.setState({
+      [event.target.name]: event.target.value,
+    });
+  };
+
+  handleSubmit = (event) => {
+    const {username, password} = this.state
+    const data = {username, password}
+    event.preventDefault();
+    fetch(`${URL}/api/accounts/account`, {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: {
+        "Content-type": "application/json",
+        Authorization: process.env.REACT_APP_TOKEN,
+      },
+    })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log("this is login", data)
+
+      let accounts_id = data.id
+      fetch(`${URL}/api/accounts/favorite/${accounts_id}`, {
+        method: "GET",
+        headers: {
+          "Content-type": "application/json",
+          Authorization: process.env.REACT_APP_TOKEN,
+        },
+      })
+      .then(response => response.json())
+      .then((favorites) => {
+        console.log("this is a favorite for this account", favorites)
+        this.props.handleSuccessfulAuth(data, favorites)
+      })
+
+
+    })
+     
+  };
+
+  
+
+
+
+
+
   render() {
+    
     return (
       <>
-        <form className="login-content">
-          <div className="login"> 
-          <label>Log In</label>
+        <form onSubmit={this.handleSubmit}>
           <input
-            type="text"
-            name="email"
-            value=""
-            onChange=""
-            placeholder="Email"
+            type="username"
+            name="username"
+            placeholder="Username"
+            value={this.state.username}
+            onChange={this.handleChange}
+            required
           />
-          </div>
-          <div>
-          <label>Password</label>
           <input
-            type="text"
+            type="password"
             name="password"
-            value=""
-            onChange=""
             placeholder="Password"
+            value={this.state.password}
+            onChange={this.handleChange}
+            required
           />
-         
-          </div>
-          <button className="login-button" type="submit">
-            Login
-          </button>
+
+          <button type="submit">Login</button>
         </form>
+
+      
       </>
     );
   }

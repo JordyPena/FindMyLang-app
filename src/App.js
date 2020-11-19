@@ -3,47 +3,151 @@ import { Route } from "react-router-dom";
 import LandingPage from "./components/LandingPage";
 import Nav from "./components/Nav";
 import Footer from "./components/Footer";
-import SearchBar from "./components/SearchBar";
 import About from "./components/About";
-import Login from "./components/Login";
-import Results from "./components/Results";
+
+
 import Account from "./components/Account";
-import Signup from "./components/Signup";
+
+import Home from "./components/Home";
+
+const URL =
+  process.env.NODE_ENV === "production"
+    ? process.env.REACT_APP_PROD_URL
+    : "http://localhost:9000";
 
 class App extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {};
+    this.state = {
+      accounts: [],
+      stores: [],
+      favorites: [],
+      language: "None",
+      languages: [],
+      isLoggedIn: false,
+      user: {},
+    };
   }
 
+  /////get stores by language
+  componentDidMount() {
+    fetch(`${URL}/api/stores`, {
+      method: "GET",
+      headers: {
+        "Content-type": "application/json",
+        Authorization: process.env.REACT_APP_TOKEN,
+      },
+    })
+      .then((response) => response.json())
+
+      .then((data) => {
+        let langs = [];
+        data.forEach((store) => {
+          store.languages
+            .trim()
+            .split(/,\s+/)
+            .forEach((language) => {
+              langs.push(language);
+            });
+        });
+        langs = [...new Set(langs)];
+        console.log("lang is", langs);
+        this.setState({
+          stores: data,
+          languages: langs,
+        });
+      })
+      .catch((error) => {
+        console.error({ error });
+      });
+  }
+
+  setLanguage = (language) => {
+    this.setState({
+      language: language,
+    });
+    console.log("selected language is", language);
+  };
+
+  handleLogin = (data, favorites) => {
+    this.setState({
+      isLoggedIn: true,
+      user: data,
+      favorites: favorites,
+    });
+  };
+
+  handleLogout = () => {
+    this.setState({
+      isLoggedIn: false,
+      user: {},
+    });
+  };
+
+  setFavorites = (favorites) => {
+    this.setState({
+      favorites: favorites,
+    });
+  };
+
+
+  
+
+  // main page
   render() {
     return (
       <>
+        <Route
+          exact
+          path="/"
+          render={(props) => {
+            console.log("this is line 74", this.state);
+            return (
+              <Home
+                {...props}
+                stores={this.state.stores.filter((store) => {
+                  return store.languages.includes(this.state.language);
+                })}
+                setLanguage={this.setLanguage}
+                languages={this.state.languages}
+                isLoggedIn={this.state.isLoggedIn}
+                handleLogin={this.handleLogin}
+                user={this.state.user}
+              />
+            );
+          }}
+        />
+
+        <Route exact path="/about" component={Nav} />
+        <Route exact path="/about" component={About} />
+        <Route exact path="/about" component={Footer} />
+
+        <Route exact path="/account" component={Nav} />
+        <Route
+          path="/account"
+          render={(props) => {
+            return (
+              <Account
+                {...props}
+                user={this.state.user}
+                handleLogout={this.handleLogout}
+                favorites={this.state.favorites}
+                stores={this.state.stores}
+                setFavorites={this.setFavorites}
+              />
+            );
+          }}
+        />
+        <Route exact path="/account" component={Footer} />
+
         
-        <Route exact path="/" component={Nav}/>
-        <Route exact path="/" component={SearchBar}/>
-        <Route exact path="/" component={Signup}/>
-        <Route exact path="/" component={Results}/>  
-        <Route exact path="/" component={Footer}/>
 
-        <Route exact path="/about" component={Nav}/>
-        <Route exact path="/about" component={About}/>
-        <Route exact path="/about" component={Footer}/>
-
-        <Route exact path="/account" component={Nav}/>
-        <Route exact path="/account" component={Account}/>
-        <Route exact path="/account" component={Footer}/>
-
-        <Route exact path="/login" component={Nav}/>
-        <Route exact path="/login" component={Login}/>  
-        <Route exact path="/login" component={Footer}/>  
-
-        <Route exact path="/landingpage" component={Nav}/>
-        <Route exact path="/landingpage" component={SearchBar}/>
+        <Route exact path="/landingpage" component={Nav} />
         <Route exact path="/landingpage" component={LandingPage}/>
-
-      
+        <Route exact path="/landingpage" component={Footer}/>
+       
+        
       </>
     );
   }
