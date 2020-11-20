@@ -45,11 +45,8 @@ function StoresList(props) {
         })}
       </div>
 
-      <img
-        src="https://i.stack.imgur.com/yEshb.gif"
-        alt="map"
-        className="map"
-      />
+      {props.Map}
+      
     </section>
   </>
   )

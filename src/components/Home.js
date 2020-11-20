@@ -5,7 +5,7 @@ import Nav from "./Nav";
 import LanguageSelector from "./LanguageSelector";
 import Signup from "./Signup";
 import Footer from "./Footer";
-import { Route } from "react-router-dom";
+import Geo from "./Geo"
 
 function Home(props) {
   const handleSuccessfulAuth = (data, favorites) => {
@@ -27,7 +27,8 @@ function Home(props) {
       : (<Signup handleSuccessfulAuth={handleSuccessfulAuth} />)}
 
 
-      <StoresList stores={props.stores} user={props.user} />
+      <StoresList stores={props.stores} user={props.user} 
+      Map={<Geo/>}/>
 
       {props.isLoggedIn ? null : (
         <Login
