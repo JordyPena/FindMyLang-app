@@ -28,7 +28,7 @@ function Home(props) {
 
 
       <StoresList stores={props.stores} user={props.user} 
-      Map={<Geo/>}/>
+      Map={<Geo stores={props.stores}/>}/>
 
       {props.isLoggedIn ? null : (
         <Login

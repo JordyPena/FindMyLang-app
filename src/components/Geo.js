@@ -1,13 +1,15 @@
 import React, { Component } from "react";
-import { Map, Marker, GoogleApiWrapper } from "google-maps-react";
+import { Map, Marker, GoogleApiWrapper, InfoWindow } from "google-maps-react";
 import PlacesAutocomplete, {
   geocodeByAddress,
   getLatLng,
 } from "react-places-autocomplete";
 
+
 export class Geo extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
       address: "",
       showingInfoWindow: false,
@@ -17,15 +19,23 @@ export class Geo extends Component {
         lat: 32.779167,
         lng: -96.808891,
       },
-    }
+      latitude: this.props.stores.map((store) => {
+        return store.latitude;
+      }),
+      longitude: this.props.stores.map((store) => {
+        return store.longitude;
+      }),
+    };
   }
-
-  onMarkerClick = (props, marker, e) =>
+  //how can i display the store address ?
+  onMarkerClick = (props, marker, e) => {
+    console.log("this is marker props", props)
     this.setState({
       selectedPlace: props,
       activeMarker: marker,
       showingInfoWindow: true,
     });
+  }
 
   onMapClicked = (props) => {
     if (this.state.showingInfoWindow) {
@@ -47,13 +57,22 @@ export class Geo extends Component {
         console.log("Success", latLng);
         this.setState({ address });
         this.setState({
-          mapCenter: latLng
-        })
+          mapCenter: latLng,
+        });
       })
       .catch((error) => console.error("Error", error));
   };
 
   render() {
+   
+    console.log(this.props.stores);
+    console.log("this is lat", this.state.latitude);
+    console.log("this is lat 2nd", this.state.latitude);
+    console.log("this is long", this.state.longitude);
+    console.log("marker props", this.state.selectedPlace)
+    console.log("this is storeInfo", this.state.selectedPlace.storeInfo)
+   
+   
     return (
       <div className="google-map">
         <PlacesAutocomplete
@@ -101,6 +120,9 @@ export class Geo extends Component {
         </PlacesAutocomplete>
         <Map
           google={this.props.google}
+          style={{width: '100%', height: '100%', position: 'relative'}}
+          className={'map'}
+          zoom={14}
           onClick={this.onMapClicked}
           initialCenter={{
             lat: this.state.mapCenter.lat,
@@ -112,13 +134,45 @@ export class Geo extends Component {
           }}
         >
           <Marker
+            id={1}
             onClick={this.onMarkerClick}
-            name={"Current location"}
+            name={"1st result"}
             position={{
-              lat: this.state.mapCenter.lat,
-              lng: this.state.mapCenter.lng,
+              lat: this.state.latitude[0],
+              lng: this.state.longitude[0],
             }}
+            storeInfo={this.props.stores[0]}
           />
+          <Marker
+            id={2}
+            onClick={this.onMarkerClick}
+            name={"2nd result"}
+            position={{
+              lat: this.state.latitude[1],
+              lng: this.state.longitude[1],
+            }}
+            storeInfo={this.props.stores[1]}
+          />
+         
+         { this.state.selectedPlace.storeInfo  &&
+          <InfoWindow
+            marker={this.state.activeMarker}
+            visible={this.state.showingInfoWindow}
+          >
+            <div>
+              <h1>{this.state.selectedPlace.name}</h1>
+          <p>{this.state.selectedPlace.storeInfo.street_num}</p>
+         <p>{this.state.selectedPlace.storeInfo.street}</p>
+         <p>{this.state.selectedPlace.storeInfo.suite}</p>
+         <p>{this.state.selectedPlace.storeInfo.city}</p>
+         <p>{this.state.selectedPlace.storeInfo.state}</p>
+         <p>{this.state.selectedPlace.storeInfo.zip}</p>
+         
+              
+            </div>
+          </InfoWindow>}
+
+  
         </Map>
       </div>
     );
