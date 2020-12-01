@@ -1,4 +1,4 @@
 export default {
-  API_ENDPOINT: ` https://cryptic-springs-19889.herokuapp.com/`,
+  API_ENDPOINT: process.env.REACT_APP_PROD_URL,
   API_KEY: process.env.REACT_APP_API_KEY,
 }
