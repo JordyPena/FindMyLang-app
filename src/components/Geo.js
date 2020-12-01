@@ -107,7 +107,7 @@ export class Geo extends Component {
 
   render() {
   console.log("current position", this.state.currentPos)
-  
+
   let directions = this.state.selectedPlace.storeInfo
   if (directions) {
     let {street_num, street, suite, city, state, zip} = this.state.selectedPlace.storeInfo
@@ -203,5 +203,5 @@ export class Geo extends Component {
 }
 
 export default GoogleApiWrapper({
-  apiKey: "AIzaSyCmB3vExaUzRt_ebaVyW4FeGF7aN9_zOSM",
+  apiKey: process.env.REACT_APP_MAP_KEY,
 })(Geo);
