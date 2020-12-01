@@ -1,10 +1,10 @@
 import React, { Component } from "react";
+
 import { Map, Marker, GoogleApiWrapper, InfoWindow } from "google-maps-react";
-import PlacesAutocomplete, {
+import {
   geocodeByAddress,
   getLatLng,
 } from "react-places-autocomplete";
-
 
 export class Geo extends Component {
   constructor(props) {
@@ -25,17 +25,59 @@ export class Geo extends Component {
       longitude: this.props.stores.map((store) => {
         return store.longitude;
       }),
+      currentPos: {
+        lat: null,
+        lng: null
+      },
     };
   }
-  //how can i display the store address ?
+
+  componentDidMount() {
+    if ("geolocation" in navigator) {
+      console.log("Available")
+    } else {
+      console.log("Not Available")
+    }
+    navigator.geolocation.getCurrentPosition((position) => {
+      console.log("Latitude is :", position.coords.latitude);
+      console.log("Longitude is :", position.coords.longitude);
+      console.log("complete position", position);
+    });
+
+    
+      if (process.env.NODE_ENV === "development") {
+        this.setState({
+          currentPos: {
+            lat: 32.779278,
+            lng: -96.794945,
+          },
+        });
+        return;
+      }
+      if (!navigator.geolocation) {
+        console.log("user declined geolocation");
+        return;
+      }
+      navigator.geolocation.getCurrentPosition((position) => {
+        console.log("line 57", position)
+        this.setState({ currentPos: {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude
+        }});
+      });
+    
+  }
+
+  
+
   onMarkerClick = (props, marker, e) => {
-    console.log("this is marker props", props)
+    console.log("this is marker props", props);
     this.setState({
       selectedPlace: props,
       activeMarker: marker,
       showingInfoWindow: true,
     });
-  }
+  };
 
   onMapClicked = (props) => {
     if (this.state.showingInfoWindow) {
@@ -64,64 +106,26 @@ export class Geo extends Component {
   };
 
   render() {
-   
-    console.log(this.props.stores);
-    console.log("this is lat", this.state.latitude);
-    console.log("this is lat 2nd", this.state.latitude);
-    console.log("this is long", this.state.longitude);
-    console.log("marker props", this.state.selectedPlace)
-    console.log("this is storeInfo", this.state.selectedPlace.storeInfo)
-   
-   
+  console.log("current position", this.state.currentPos)
+  
+  let directions = this.state.selectedPlace.storeInfo
+  if (directions) {
+    let {street_num, street, suite, city, state, zip} = this.state.selectedPlace.storeInfo
+    directions = `${street_num}, ${street}, ${suite}, ${city}, ${state}, ${zip}`
+    directions = escape(directions)
+
+    console.log("param is", directions)
+  }
+    
+    
+        
+
     return (
-      <div className="google-map">
-        <PlacesAutocomplete
-          value={this.state.address}
-          onChange={this.handleChange}
-          onSelect={this.handleSelect}
-        >
-          {({
-            getInputProps,
-            suggestions,
-            getSuggestionItemProps,
-            loading,
-          }) => (
-            <div>
-              <input
-                {...getInputProps({
-                  placeholder: "Search Places ...",
-                  className: "location-search-input",
-                })}
-              />
-              <div className="autocomplete-dropdown-container">
-                {loading && <div>Loading...</div>}
-                {suggestions.map((suggestion) => {
-                  const className = suggestion.active
-                    ? "suggestion-item--active"
-                    : "suggestion-item";
-                  // inline style for demonstration purpose
-                  const style = suggestion.active
-                    ? { backgroundColor: "#fafafa", cursor: "pointer" }
-                    : { backgroundColor: "#ffffff", cursor: "pointer" };
-                  return (
-                    <div
-                      {...getSuggestionItemProps(suggestion, {
-                        className,
-                        style,
-                      })}
-                    >
-                      <span>{suggestion.description}</span>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          )}
-        </PlacesAutocomplete>
+      <div className="google_map">
         <Map
           google={this.props.google}
-          style={{width: '100%', height: '100%', position: 'relative'}}
-          className={'map'}
+          style={{ width: "100%", height: "100%", position: "relative" }}
+          className={"map"}
           zoom={14}
           onClick={this.onMapClicked}
           initialCenter={{
@@ -133,46 +137,65 @@ export class Geo extends Component {
             lng: this.state.mapCenter.lng,
           }}
         >
-          <Marker
-            id={1}
-            onClick={this.onMarkerClick}
-            name={"1st result"}
-            position={{
-              lat: this.state.latitude[0],
-              lng: this.state.longitude[0],
-            }}
-            storeInfo={this.props.stores[0]}
-          />
-          <Marker
-            id={2}
-            onClick={this.onMarkerClick}
-            name={"2nd result"}
-            position={{
-              lat: this.state.latitude[1],
-              lng: this.state.longitude[1],
-            }}
-            storeInfo={this.props.stores[1]}
-          />
+          {this.props.stores.map((store, idx) => {
+            return (
+              <Marker
+                key={idx}
+                id={idx}
+                onClick={this.onMarkerClick}
+                name={"Result"}
+                position={{
+                  lat: store.latitude,
+                  lng: store.longitude,
+                }}
+                storeInfo={store}
+              />
+            );
+          })}
          
-         { this.state.selectedPlace.storeInfo  &&
-          <InfoWindow
-            marker={this.state.activeMarker}
-            visible={this.state.showingInfoWindow}
-          >
-            <div>
-              <h1>{this.state.selectedPlace.name}</h1>
-          <p>{this.state.selectedPlace.storeInfo.street_num}</p>
-         <p>{this.state.selectedPlace.storeInfo.street}</p>
-         <p>{this.state.selectedPlace.storeInfo.suite}</p>
-         <p>{this.state.selectedPlace.storeInfo.city}</p>
-         <p>{this.state.selectedPlace.storeInfo.state}</p>
-         <p>{this.state.selectedPlace.storeInfo.zip}</p>
-         
-              
-            </div>
-          </InfoWindow>}
 
-  
+          { this.state.currentPos && (
+            <Marker
+            user={"Current position"}
+            onClick={this.onMarkerClick}
+             icon={{
+              url: "https://img.icons8.com/nolan/64/marker.png"
+             }}
+            position={{
+              lat: this.state.currentPos.lat,
+              lng: this.state.currentPos.lng
+            }}/>
+          )
+            
+          }
+         
+
+          {this.state.selectedPlace.storeInfo && (
+            <InfoWindow
+              marker={this.state.activeMarker}
+              visible={this.state.showingInfoWindow}
+            >
+              <div>
+                <h1>{this.state.selectedPlace.name}</h1>
+                <p>{this.state.selectedPlace.storeInfo.street_num}</p>
+                <p>{this.state.selectedPlace.storeInfo.street}</p>
+                <p>{this.state.selectedPlace.storeInfo.suite}</p>
+                <p>{this.state.selectedPlace.storeInfo.city}</p>
+                <p>{this.state.selectedPlace.storeInfo.state}</p>
+                <p>{this.state.selectedPlace.storeInfo.zip}</p>
+                <a href={`https://www.google.com/maps/dir/?api=1&destination=${directions}`}>Directions</a>
+              </div>
+            </InfoWindow>
+          )}
+
+          {this.state.selectedPlace.user && (
+            <InfoWindow
+              marker={this.state.activeMarker}
+              visible={this.state.showingInfoWindow}
+            >
+              <h1>{this.state.selectedPlace.user}</h1>
+            </InfoWindow>
+          )}
         </Map>
       </div>
     );

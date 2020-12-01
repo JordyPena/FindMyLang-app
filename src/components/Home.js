@@ -8,27 +8,20 @@ import Footer from "./Footer";
 import Geo from "./Geo"
 
 function Home(props) {
-  const handleSuccessfulAuth = (data, favorites) => {
-    props.handleLogin(data, favorites);
+  const handleSuccessfulAuth = (data) => {
+    props.handleLogin(data);
     props.history.push("/account");
   };
 
   return (
     <>
       <h3>isLoggedIn: {props.isLoggedIn ? "true" : "false"}</h3>
-      <Nav />
+      
 
       <LanguageSelector
         setLanguage={props.setLanguage}
         languages={props.languages}
       />
-
-      {props.isLoggedIn ? null
-      : (<Signup handleSuccessfulAuth={handleSuccessfulAuth} />)}
-
-
-      <StoresList stores={props.stores} user={props.user} 
-      Map={<Geo stores={props.stores}/>}/>
 
       {props.isLoggedIn ? null : (
         <Login
@@ -37,7 +30,15 @@ function Home(props) {
         />
       )}
 
-      <Footer />
+      {props.isLoggedIn ? null
+      : (<Signup handleSuccessfulAuth={handleSuccessfulAuth} />)}
+
+
+      <StoresList stores={props.stores} user={props.user} language={props.language}
+      Map={<Geo stores={props.stores}/>}/>
+
+
+      
     </>
   );
 }

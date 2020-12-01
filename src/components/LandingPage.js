@@ -1,6 +1,6 @@
 import React from "react";
 import "../styling/LandingPage.css";
-import LanguageSelector from "../components/LanguageSelector"
+
 
 function LandingPage() {
   return (
@@ -26,8 +26,7 @@ function LandingPage() {
             <h3>How to use</h3>
             <p>
               Click on home and 
-              In the dropdown, select the language you require. Click on the
-              search button, And you will see any results that fit your
+              In the dropdown, select the language you require. And you will see any results that fit your
               criteria.
             </p>
             <p>

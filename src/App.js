@@ -22,8 +22,7 @@ class App extends Component {
     this.state = {
       accounts: [],
       stores: [],
-      favorites: [],
-      language: "None",
+      language: "All",
       languages: [],
       isLoggedIn: false,
       user: {},
@@ -74,7 +73,6 @@ class App extends Component {
     this.setState({
       isLoggedIn: true,
       user: data,
-      favorites: favorites,
     });
   };
 
@@ -85,19 +83,23 @@ class App extends Component {
     });
   };
 
-  setFavorites = (favorites) => {
-    this.setState({
-      favorites: favorites,
-    });
-  };
-
+  
 
   
 
   // main page
   render() {
+     // stores=
+    let stores = this.state.stores
+    if (this.state.language !== "All") {
+      stores = stores.filter((store) => {
+           return store.languages.includes(this.state.language);
+         })
+    }
     return (
       <>
+        <Nav user={this.state.user}/>
+        
         <Route
           exact
           path="/"
@@ -106,24 +108,26 @@ class App extends Component {
             return (
               <Home
                 {...props}
-                stores={this.state.stores.filter((store) => {
-                  return store.languages.includes(this.state.language);
-                })}
+                stores={stores}
+               
                 setLanguage={this.setLanguage}
                 languages={this.state.languages}
                 isLoggedIn={this.state.isLoggedIn}
                 handleLogin={this.handleLogin}
                 user={this.state.user}
+                language={this.state.language}
               />
             );
           }}
         />
 
-        <Route exact path="/about" component={Nav} />
+       
         <Route exact path="/about" component={About} />
-        <Route exact path="/about" component={Footer} />
+        
 
-        <Route exact path="/account" component={Nav} />
+
+        
+
         <Route
           path="/account"
           render={(props) => {
@@ -132,22 +136,22 @@ class App extends Component {
                 {...props}
                 user={this.state.user}
                 handleLogout={this.handleLogout}
-                favorites={this.state.favorites}
+              
                 stores={this.state.stores}
-                setFavorites={this.setFavorites}
+               
               />
             );
           }}
         />
-        <Route exact path="/account" component={Footer} />
-
-        
-
-        <Route exact path="/landingpage" component={Nav} />
-        <Route exact path="/landingpage" component={LandingPage}/>
-        <Route exact path="/landingpage" component={Footer}/>
        
+
         
+
+       
+        <Route exact path="/landingpage" component={LandingPage}/>
+       
+       
+        <Footer/>
       </>
     );
   }

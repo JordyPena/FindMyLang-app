@@ -1,16 +1,24 @@
 .results {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: left;
 }
 
 .list {
  
   display: flex;
   flex-direction: column;
+  font-size: medium;
 }
 
 .list ul {
   list-style-type: none;
+ 
+}
+
+.map {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
 }
 

@@ -38,21 +38,8 @@ class Login extends Component {
     .then((response) => response.json())
     .then((data) => {
       console.log("this is login", data)
-
-      let accounts_id = data.id
-      fetch(`${URL}/api/accounts/favorite/${accounts_id}`, {
-        method: "GET",
-        headers: {
-          "Content-type": "application/json",
-          Authorization: process.env.REACT_APP_TOKEN,
-        },
-      })
-      .then(response => response.json())
-      .then((favorites) => {
-        console.log("this is a favorite for this account", favorites)
-        this.props.handleSuccessfulAuth(data, favorites)
-      })
-
+      this.props.handleSuccessfulAuth(data)
+      
 
     })
      
@@ -68,7 +55,7 @@ class Login extends Component {
     
     return (
       <>
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={this.handleSubmit} className="login-bar">
           <input
             type="username"
             name="username"
