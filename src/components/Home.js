@@ -1,10 +1,8 @@
 import React from "react";
 import Login from "../components/Login";
 import StoresList from "./StoresList";
-import Nav from "./Nav";
 import LanguageSelector from "./LanguageSelector";
 import Signup from "./Signup";
-import Footer from "./Footer";
 import Geo from "./Geo"
 
 function Home(props) {
