@@ -31,7 +31,7 @@ class App extends Component {
 
   /////get stores by language
   componentDidMount() {
-    fetch(`${URL}/api/stores`, {
+    fetch(`https://cryptic-springs-19889.herokuapp.com/api/stores`, {
       method: "GET",
       headers: {
         "Content-type": "application/json",
@@ -87,9 +87,9 @@ class App extends Component {
 
   
 
-  // main page
+ 
   render() {
-     // stores=
+     
     let stores = this.state.stores
     if (this.state.language !== "All") {
       stores = stores.filter((store) => {
