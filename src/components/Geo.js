@@ -1,17 +1,17 @@
 import React, { Component } from "react";
 
 import { Map, Marker, GoogleApiWrapper, InfoWindow } from "google-maps-react";
-import {
-  geocodeByAddress,
-  getLatLng,
-} from "react-places-autocomplete";
+// import {
+//   geocodeByAddress,
+//   getLatLng,
+// } from "react-places-autocomplete";
 
 export class Geo extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      address: "",
+      // address: "",
       showingInfoWindow: false,
       activeMarker: {},
       selectedPlace: {},
@@ -92,18 +92,18 @@ export class Geo extends Component {
     this.setState({ address });
   };
 
-  handleSelect = (address) => {
-    geocodeByAddress(address)
-      .then((results) => getLatLng(results[0]))
-      .then((latLng) => {
-        console.log("Success", latLng);
-        this.setState({ address });
-        this.setState({
-          mapCenter: latLng,
-        });
-      })
-      .catch((error) => console.error("Error", error));
-  };
+  // handleSelect = (address) => {
+  //   geocodeByAddress(address)
+  //     .then((results) => getLatLng(results[0]))
+  //     .then((latLng) => {
+  //       console.log("Success", latLng);
+  //       this.setState({ address });
+  //       this.setState({
+  //         mapCenter: latLng,
+  //       });
+  //     })
+  //     .catch((error) => console.error("Error", error));
+  // };
 
   render() {
   console.log("current position", this.state.currentPos)
