@@ -31,7 +31,7 @@ class App extends Component {
 
   /////get stores by language
   componentDidMount() {
-    fetch(`${URL}/api/stores`, {
+    fetch(`${URL}api/stores`, {
       method: "GET",
       headers: {
         "Content-type": "application/json",
