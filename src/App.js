@@ -31,7 +31,8 @@ class App extends Component {
 
   /////get stores by language
   componentDidMount() {
-    console.log("in fetch")
+    
+    console.log("in fetch", URL)
     fetch(`${URL}/api/stores`, {
       method: "GET",
       headers: {
