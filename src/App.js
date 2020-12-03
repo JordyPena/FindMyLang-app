@@ -41,6 +41,7 @@ class App extends Component {
       .then((response) => response.json())
 
       .then((data) => {
+        console.log("this is data", data)
         let langs = [];
         data.forEach((store) => {
           store.languages
