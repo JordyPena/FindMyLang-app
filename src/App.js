@@ -60,9 +60,9 @@ class App extends Component {
           languages: langs,
         });
       })
-      // .catch((error) => {
-      //   console.error({ error });
-      // });
+      .catch((error) => {
+        console.error({ error });
+      });
   }
 
   setLanguage = (language) => {
