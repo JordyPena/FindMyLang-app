@@ -31,6 +31,7 @@ class App extends Component {
 
   /////get stores by language
   componentDidMount() {
+    console.log("in fetch")
     fetch(`${URL}api/stores`, {
       method: "GET",
       headers: {
@@ -39,7 +40,7 @@ class App extends Component {
       },
     })
       .then((response) => response.json())
-
+    console.log(response)
       .then((data) => {
         console.log("this is data", data)
         let langs = [];
