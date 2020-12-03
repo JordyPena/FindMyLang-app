@@ -32,15 +32,15 @@ class App extends Component {
   /////get stores by language
   componentDidMount() {
     console.log("in fetch")
-    fetch(`${URL}api/stores`, {
+    fetch(`${URL}/api/stores`, {
       method: "GET",
       headers: {
         "Content-type": "application/json",
         Authorization: process.env.REACT_APP_TOKEN,
       },
     })
-      .then((response) => response.json())
-    console.log(response)
+      .then((response)=> response.json())
+    
       .then((data) => {
         console.log("this is data", data)
         let langs = [];
@@ -59,9 +59,9 @@ class App extends Component {
           languages: langs,
         });
       })
-      // .catch((error) => {
-      //   console.error({ error });
-      // });
+      .catch((error) => {
+        console.error({ error });
+      });
   }
 
   setLanguage = (language) => {
