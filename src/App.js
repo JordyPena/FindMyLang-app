@@ -40,7 +40,9 @@ class App extends Component {
         Authorization: process.env.REACT_APP_TOKEN,
       },
     })
-      .then((response)=> response.json())
+      .then((response)=> {
+       response.json()
+       console.log("this is response", response)})
     
       .then((data) => {
         console.log("this is data", data)
