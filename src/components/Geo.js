@@ -203,5 +203,5 @@ export class Geo extends Component {
 }
 
 export default GoogleApiWrapper({
-  apiKey: "AIzaSyCmB3vExaUzRt_ebaVyW4FeGF7aN9_zOSM",
+  apiKey: process.env.REACT_APP_MAP_KEY,
 })(Geo);
