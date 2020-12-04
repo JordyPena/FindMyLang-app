@@ -46,7 +46,18 @@ class Login extends Component {
      
   };
 
-  
+  // .then((response) => {
+  //   if (response.status === 404) {
+  //       throw Error();
+  //   }
+  //   return response.json()})
+  // .then((data) => {
+  //   console.log("this is login", data)
+  //   this.props.handleSuccessfulAuth(data)
+  // })
+  // .catch(error => {
+  //   console.log("error log in");
+  // })
 
 
 
