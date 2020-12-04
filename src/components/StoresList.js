@@ -1,10 +1,10 @@
 import "../styling/Results.css";
 import React from "react";
 
-const URL =
-  process.env.NODE_ENV === "production"
-    ? process.env.REACT_APP_PROD_URL
-    : "http://localhost:9000";
+// const URL =
+//   process.env.NODE_ENV === "production"
+//     ? process.env.REACT_APP_PROD_URL
+//     : "http://localhost:9000";
 
 function StoresList(props) {
   //on click handler
@@ -20,7 +20,7 @@ function StoresList(props) {
       return;
     }
 
-    fetch(`${URL}/api/accounts/favorite`, {
+    fetch(`https://mighty-everglades-36378.herokuapp.com/api/accounts/favorite`, {
       method: "POST",
       body: JSON.stringify(data),
       headers: {

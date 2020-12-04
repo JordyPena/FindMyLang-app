@@ -10,9 +10,9 @@ function About() {
         </header>
         <section className="about-content">
           <p>
-            At T-mobile we want to make sure you get the best customer
+            At FindMyLang we want to make sure you get the best customer
             experience as possible. Because of that we want you to be able to
-            find a store that speaks the language you speak in the Dallas area.
+            find a T-mobile store that speaks the language you speak in the Dallas area.
           </p>
           <p>
             With our app you can simply select the language of your choice And

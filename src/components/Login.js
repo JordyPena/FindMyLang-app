@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 
 
-const URL =
-  process.env.NODE_ENV === "production"
-    ? process.env.REACT_APP_PROD_URL
-    : "http://localhost:9000";
+// const URL =
+//   process.env.NODE_ENV === "production"
+//     ? process.env.REACT_APP_PROD_URL
+//     : "http://localhost:9000";
 
 class Login extends Component {
   constructor(props) {
@@ -27,7 +27,7 @@ class Login extends Component {
     const {username, password} = this.state
     const data = {username, password}
     event.preventDefault();
-    fetch(`${URL}/api/accounts/account`, {
+    fetch(`https://mighty-everglades-36378.herokuapp.com/api/accounts/account`, {
       method: "POST",
       body: JSON.stringify(data),
       headers: {

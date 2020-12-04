@@ -26,7 +26,7 @@ function LandingPage() {
             <h3>How to use</h3>
             <p>
               Click on home and 
-              In the dropdown, select the language you require. And you will see any results that fit your
+              in the dropdown, select the language you require. You will see results that fit your
               criteria.
             </p>
             <p>

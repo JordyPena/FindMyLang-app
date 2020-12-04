@@ -2,10 +2,10 @@ import React, { Component } from "react";
 import {Redirect} from "react-router-dom"
 import "../styling/Account.css";
 
-const URL =
-  process.env.NODE_ENV === "production"
-    ? process.env.REACT_APP_PROD_URL
-    : "http://localhost:9000";
+// const URL =
+//   process.env.NODE_ENV === "production"
+//     ? process.env.REACT_APP_PROD_URL
+//     : "http://localhost:9000";
 
   class Account extends Component {
     constructor(props) {
@@ -20,7 +20,7 @@ const URL =
         return;
       }
       let accounts_id = this.props.user.id
-      fetch(`${URL}/api/accounts/favorite/${accounts_id}`, {
+      fetch(`https://mighty-everglades-36378.herokuapp.com/api/accounts/favorite/${accounts_id}`, {
         method: "GET",
         headers: {
           "Content-type": "application/json",
@@ -45,7 +45,7 @@ const URL =
     
     handleClick = (favorite_id) => {
       console.log("line 12 in account", favorite_id)
-      const url = `${URL}/api/accounts/favorite/${favorite_id}`
+      const url = `https://mighty-everglades-36378.herokuapp.com/api/accounts/favorite/${favorite_id}`
       console.log("this is url line 14", url)
       fetch(`${url}`, {
         method: "DELETE",
