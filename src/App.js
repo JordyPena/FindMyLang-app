@@ -33,7 +33,7 @@ class App extends Component {
   componentDidMount() {
     
     console.log("in fetch", URL)
-    fetch(`https://find-my-lang-app.vercel.app/api/stores`, {
+    fetch(`https://mighty-everglades-36378.herokuapp.com/api/stores`, {
       method: "GET",
       headers: {
         "Content-type": "application/json",
