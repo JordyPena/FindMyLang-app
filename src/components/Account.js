@@ -63,7 +63,7 @@ import "../styling/Account.css";
           this.setState({
             favorites: newFavs
           })
-          
+          this.props.history.push("/account")
         }
       })
     }
