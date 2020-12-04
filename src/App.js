@@ -10,10 +10,10 @@ import Account from "./components/Account";
 
 import Home from "./components/Home";
 
-const URL =
-  process.env.NODE_ENV === "production"
-    ? process.env.REACT_APP_PROD_URL
-    : "http://localhost:9000";
+// const URL =
+//   process.env.NODE_ENV === "production"
+//     ? process.env.REACT_APP_PROD_URL
+//     : "http://localhost:9000";
 
 class App extends Component {
   constructor(props) {
@@ -33,7 +33,7 @@ class App extends Component {
   componentDidMount() {
     
     console.log("in fetch", URL)
-    fetch(`${URL}/api/stores`, {
+    fetch(`https://find-my-lang-app.vercel.app/api/stores`, {
       method: "GET",
       headers: {
         "Content-type": "application/json",
