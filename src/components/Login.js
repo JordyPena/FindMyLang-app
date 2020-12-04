@@ -42,6 +42,10 @@ class Login extends Component {
       
 
     })
+    if (data !== data) {
+      alert("Create an account to login");
+      return;
+    }
      
   };
 
