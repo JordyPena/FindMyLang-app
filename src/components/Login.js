@@ -27,7 +27,8 @@ class Login extends Component {
     const {username, password} = this.state
     const data = {username, password}
     event.preventDefault();
-    fetch(`https://mighty-everglades-36378.herokuapp.com/api/accounts/account`, {
+  
+    fetch(`http://localhost:9000/api/accounts/account`, {
       method: "POST",
       body: JSON.stringify(data),
       headers: {
@@ -42,10 +43,6 @@ class Login extends Component {
       
 
     })
-    if (data !== data) {
-      alert("Create an account to login");
-      return;
-    }
      
   };
 

@@ -20,7 +20,7 @@ import "../styling/Account.css";
         return;
       }
       let accounts_id = this.props.user.id
-      fetch(`https://mighty-everglades-36378.herokuapp.com/api/accounts/favorite/${accounts_id}`, {
+      fetch(`http://localhost:9000/api/accounts/favorite/${accounts_id}`, {
         method: "GET",
         headers: {
           "Content-type": "application/json",
@@ -45,7 +45,7 @@ import "../styling/Account.css";
     
     handleClick = (favorite_id) => {
       console.log("line 12 in account", favorite_id)
-      const url = `https://mighty-everglades-36378.herokuapp.com/api/accounts/favorite/${favorite_id}`
+      const url = `http://localhost:9000/api/accounts/favorite/${favorite_id}`
       console.log("this is url line 14", url)
       fetch(`${url}`, {
         method: "DELETE",
@@ -83,7 +83,8 @@ import "../styling/Account.css";
             <p>Favorites</p>
             <div className="list">
               <ul>
-                {this.state.favorites.map((favorite, idx) => {
+                { this.state.favorites && (
+                this.state.favorites.map((favorite, idx) => {
                   return this.props.stores.map((store) => {
                     if (store.id === favorite.store_id)
                       return (
@@ -100,7 +101,7 @@ import "../styling/Account.css";
                         </li>
                       );
                   });
-                })}
+                }))}
                 {console.log("this is line 35", this.props)}
               </ul>
             </div>

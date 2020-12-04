@@ -20,7 +20,7 @@ function StoresList(props) {
       return;
     }
 
-    fetch(`https://mighty-everglades-36378.herokuapp.com/api/accounts/favorite`, {
+    fetch(`http://localhost:9000/api/accounts/favorite`, {
       method: "POST",
       body: JSON.stringify(data),
       headers: {

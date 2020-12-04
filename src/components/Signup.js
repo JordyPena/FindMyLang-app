@@ -28,7 +28,7 @@ class Signup extends Component {
     const {username, password} = this.state
     const data = {username, password}
     event.preventDefault();
-    fetch(`https://mighty-everglades-36378.herokuapp.com/api/accounts`, {
+    fetch(`http://localhost:9000/api/accounts`, {
       method: "POST",
       body: JSON.stringify(data),
       headers: {
@@ -40,7 +40,7 @@ class Signup extends Component {
     .then((data) => {
       console.log("this is registration", data)
       if (data.username !== "" &&
-      data.password !== "")
+      data.password !== "" )
       this.props.handleSuccessfulAuth(data)
     })
      

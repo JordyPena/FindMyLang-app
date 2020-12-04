@@ -25,6 +25,8 @@ function Home(props) {
         <Login
           handleSuccessfulAuth={handleSuccessfulAuth}
           isLoggedIn={props.isLoggedIn}
+          props={props}
+          user={props.user}
         />
       )}
 

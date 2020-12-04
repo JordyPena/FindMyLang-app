@@ -33,7 +33,7 @@ class App extends Component {
   componentDidMount() {
     
     console.log("in fetch", URL)
-    fetch(`https://mighty-everglades-36378.herokuapp.com/api/stores`, {
+    fetch(`http://localhost:9000/api/stores`, {
       method: "GET",
       headers: {
         "Content-type": "application/json",
