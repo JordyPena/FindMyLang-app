@@ -42,7 +42,7 @@ class App extends Component {
     })
       .then((response)=> {
        response.json()
-       console.log("this is response", response)})
+       console.log("this is response", response.json)})
     
       .then((data) => {
         console.log("this is data", data)
