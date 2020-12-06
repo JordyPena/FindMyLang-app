@@ -10,10 +10,7 @@ import Account from "./components/Account";
 
 import Home from "./components/Home";
 
-// const URL =
-//   process.env.NODE_ENV === "production"
-//     ? process.env.REACT_APP_PROD_URL
-//     : "http://localhost:9000";
+const URL = process.env.REACT_APP_DB_URL
 
 class App extends Component {
   constructor(props) {
@@ -33,7 +30,7 @@ class App extends Component {
   componentDidMount() {
     
     console.log("in fetch", URL)
-    fetch(`http://localhost:9000/api/stores`, {
+    fetch(`${URL}/api/stores`, {
       method: "GET",
       headers: {
         "Content-type": "application/json",
