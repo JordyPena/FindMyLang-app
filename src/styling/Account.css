@@ -21,10 +21,11 @@
 }
 
 .delete {
-  width: 20%;
+  width: 30%;
   place-items: center;
   color: black;
   background-color: #91C4D9;
+  border-radius: 10px;
 }
 
 .delete:hover {
@@ -75,7 +76,7 @@
   background-color: #91C4D9;
   padding: 5px;
   margin: 5px;
-  border-radius: 10%;
+  border-radius: 10px;
 }
 
 .about {
