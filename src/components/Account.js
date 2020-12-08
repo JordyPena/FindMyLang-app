@@ -53,7 +53,7 @@ const URL = process.env.REACT_APP_DB_URL
       })
       .then((response) => {
         if (response.ok) {
-          const newFavs = this.props.favorites.filter((favorite) => {
+          const newFavs = this.state.favorites.filter((favorite) => {
             return favorite.id !== favorite_id
           })
           console.log(newFavs)
@@ -71,21 +71,25 @@ const URL = process.env.REACT_APP_DB_URL
         <>
         {!Object.keys(this.props.user).length &&
         <Redirect to="/"/>}
-          <section className="username">
-            <p>Hi, {this.props.user.username} </p>
-            <button onClick={() => this.handleLogoutClick()}>Logout</button>
+          <section className="username-style">
+            <h1 className="username">Hi {this.props.user.username} </h1>
+            <button className="logout-style" onClick={() => this.handleLogoutClick()}>Logout</button>
           </section>
+
+         
     
-          <section className="favorites">
-            <p>Favorites</p>
+    <h2 className="fav-header">Favorites</h2>
+          <section>
+           
             <div className="list">
+           
               <ul>
                 { this.state.favorites && (
                 this.state.favorites.map((favorite, idx) => {
                   return this.props.stores.map((store) => {
                     if (store.id === favorite.store_id)
                       return (
-                        <li key={idx}>
+                        <li key={idx} className="fav-style">
                           <p>{store.name}</p>
                           <p>{store.street_num}</p>
                           <p>{store.street}</p>
@@ -94,7 +98,7 @@ const URL = process.env.REACT_APP_DB_URL
                             {store.city}, {store.state} {store.zip}
                           </p>
                           <p>{store.languages}</p>
-                          <button onClick={() => this.handleClick(favorite.id)}>Delete</button>
+                        <button className="delete" onClick={() => this.handleClick(favorite.id)}>Delete</button>
                         </li>
                       );
                   });

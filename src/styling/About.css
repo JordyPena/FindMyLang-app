@@ -1,8 +1,16 @@
 .about-header {
   display: flex;
   justify-content: center;
+  color: #4B8CA6;
 }
 
-.about-content p {
+.about-content {
   margin-bottom: 1rem;
 }
+
+.p {
+  color: #245C73;
+  font-family: Helvetica, sans-serif;
+}
+
+

@@ -4,6 +4,7 @@ import LandingPage from "./components/LandingPage";
 import Nav from "./components/Nav";
 import Footer from "./components/Footer";
 import About from "./components/About";
+import "./index.css"
 
 
 import Account from "./components/Account";
@@ -99,7 +100,9 @@ class App extends Component {
     return (
       <>
         <Nav user={this.state.user}/>
-        
+        <main className="container">
+
+       
         <Route
           exact
           path="/"
@@ -150,7 +153,7 @@ class App extends Component {
        
         <Route exact path="/landingpage" component={LandingPage}/>
        
-       
+        </main>
         <Footer/>
       </>
     );

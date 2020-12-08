@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-
+import "../styling/Signup.css"
 
 const URL = process.env.REACT_APP_DB_URL
 
@@ -36,8 +36,9 @@ class Signup extends Component {
     .then((response) => response.json())
     .then((data) => {
       console.log("this is registration", data)
-      if (data.username !== "" &&
-      data.password !== "" )
+      if (data.error) return alert("username already exist")
+      if (!data.username &&
+      !data.password)
       this.props.handleSuccessfulAuth(data)
     })
      
@@ -51,8 +52,8 @@ class Signup extends Component {
   render() {
     return (
       <>
-        <form onSubmit={this.handleSubmit}>
-          <label>Register</label>
+        <form onSubmit={this.handleSubmit} className="signup">
+      
           <input
             type="username"
             name="username"
@@ -79,7 +80,7 @@ class Signup extends Component {
             required
           />
 
-          <button type="submit">Register</button>
+          <button type="submit" className="signup-Button">Register</button>
         </form>
 
       

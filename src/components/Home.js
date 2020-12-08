@@ -30,13 +30,15 @@ function Home(props) {
         />
       )}
 
+      
+
+
+
       {props.isLoggedIn ? null
       : (<Signup handleSuccessfulAuth={handleSuccessfulAuth} />)}
 
-
-      <StoresList stores={props.stores} user={props.user} language={props.language}
-      Map={<Geo stores={props.stores}/>}/>
-
+  <Geo stores={props.stores}/>
+<StoresList stores={props.stores} user={props.user} language={props.language}/>
 
       
     </>

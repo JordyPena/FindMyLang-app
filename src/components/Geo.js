@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-
 import { Map, Marker, GoogleApiWrapper, InfoWindow } from "google-maps-react";
 // import {
 //   geocodeByAddress,
@@ -27,16 +26,16 @@ export class Geo extends Component {
       }),
       currentPos: {
         lat: null,
-        lng: null
+        lng: null,
       },
     };
   }
 
   componentDidMount() {
     if ("geolocation" in navigator) {
-      console.log("Available")
+      console.log("Available");
     } else {
-      console.log("Not Available")
+      console.log("Not Available");
     }
     navigator.geolocation.getCurrentPosition((position) => {
       console.log("Latitude is :", position.coords.latitude);
@@ -44,31 +43,29 @@ export class Geo extends Component {
       console.log("complete position", position);
     });
 
-    
-      if (process.env.NODE_ENV === "development") {
-        this.setState({
-          currentPos: {
-            lat: 32.779278,
-            lng: -96.794945,
-          },
-        });
-        return;
-      }
-      if (!navigator.geolocation) {
-        console.log("user declined geolocation");
-        return;
-      }
-      navigator.geolocation.getCurrentPosition((position) => {
-        console.log("line 57", position)
-        this.setState({ currentPos: {
-          lat: position.coords.latitude,
-          lng: position.coords.longitude
-        }});
+    if (process.env.NODE_ENV === "development") {
+      this.setState({
+        currentPos: {
+          lat: 32.779278,
+          lng: -96.794945,
+        },
       });
-    
+      return;
+    }
+    if (!navigator.geolocation) {
+      console.log("user declined geolocation");
+      return;
+    }
+    navigator.geolocation.getCurrentPosition((position) => {
+      console.log("line 57", position);
+      this.setState({
+        currentPos: {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+        },
+      });
+    });
   }
-
-  
 
   onMarkerClick = (props, marker, e) => {
     console.log("this is marker props", props);
@@ -106,98 +103,106 @@ export class Geo extends Component {
   // };
 
   render() {
-  console.log("current position", this.state.currentPos)
+    console.log("current position", this.state.currentPos);
 
-  let directions = this.state.selectedPlace.storeInfo
-  if (directions) {
-    let {street_num, street, suite, city, state, zip} = this.state.selectedPlace.storeInfo
-    directions = `${street_num}, ${street}, ${suite}, ${city}, ${state}, ${zip}`
-    directions = escape(directions)
+    let directions = this.state.selectedPlace.storeInfo;
+    if (directions) {
+      let {
+        street_num,
+        street,
+        suite,
+        city,
+        state,
+        zip,
+      } = this.state.selectedPlace.storeInfo;
+      directions = `${street_num}, ${street}, ${suite}, ${city}, ${state}, ${zip}`;
+      directions = escape(directions);
 
-    console.log("param is", directions)
-  }
-    
-    
-        
+      console.log("param is", directions);
+    }
 
     return (
-      <div className="google_map">
-        <Map
-          google={this.props.google}
-          style={{ width: "100%", height: "100%", position: "relative" }}
-          className={"map"}
-          zoom={14}
-          onClick={this.onMapClicked}
-          initialCenter={{
-            lat: this.state.mapCenter.lat,
-            lng: this.state.mapCenter.lng,
-          }}
-          center={{
-            lat: this.state.mapCenter.lat,
-            lng: this.state.mapCenter.lng,
-          }}
-        >
-          {this.props.stores.map((store, idx) => {
-            return (
-              <Marker
-                key={idx}
-                id={idx}
-                onClick={this.onMarkerClick}
-                name={"Result"}
-                position={{
-                  lat: store.latitude,
-                  lng: store.longitude,
-                }}
-                storeInfo={store}
-              />
-            );
-          })}
-         
-
-          { this.state.currentPos && (
+      <Map
+        google={this.props.google}
+        containerStyle={{ 
+          width: "100%", 
+          height: "500px", 
+          position: "relative" 
+        }}
+        className={"map"}
+        zoom={14}
+        onClick={this.onMapClicked}
+        initialCenter={{
+          lat: this.state.mapCenter.lat,
+          lng: this.state.mapCenter.lng,
+        }}
+        center={{
+          lat: this.state.mapCenter.lat,
+          lng: this.state.mapCenter.lng,
+        }}
+      >
+        {this.props.stores.map((store, idx) => {
+          return (
             <Marker
+              key={idx}
+              id={idx}
+              onClick={this.onMarkerClick}
+              name={"Result"}
+              position={{
+                lat: store.latitude,
+                lng: store.longitude,
+              }}
+              storeInfo={store}
+            />
+          );
+        })}
+
+        {this.state.currentPos && (
+          <Marker
             user={"Current position"}
             onClick={this.onMarkerClick}
-             icon={{
-              url: "https://img.icons8.com/nolan/64/marker.png"
-             }}
+            icon={{
+              url: "https://img.icons8.com/nolan/64/marker.png",
+            }}
             position={{
               lat: this.state.currentPos.lat,
-              lng: this.state.currentPos.lng
-            }}/>
-          )
-            
-          }
-         
+              lng: this.state.currentPos.lng,
+            }}
+          />
+        )}
 
-          {this.state.selectedPlace.storeInfo && (
-            <InfoWindow
-              marker={this.state.activeMarker}
-              visible={this.state.showingInfoWindow}
-            >
-              <div>
-                <h1>{this.state.selectedPlace.name}</h1>
-                <p>{this.state.selectedPlace.storeInfo.street_num}</p>
-                <p>{this.state.selectedPlace.storeInfo.street}</p>
-                <p>{this.state.selectedPlace.storeInfo.suite}</p>
-                <p>{this.state.selectedPlace.storeInfo.city}</p>
-                <p>{this.state.selectedPlace.storeInfo.state}</p>
-                <p>{this.state.selectedPlace.storeInfo.zip}</p>
-                <a href={`https://www.google.com/maps/dir/?api=1&destination=${directions}`}>Directions</a>
-              </div>
-            </InfoWindow>
-          )}
+        {this.state.selectedPlace.storeInfo && (
+          <InfoWindow
+            marker={this.state.activeMarker}
+            visible={this.state.showingInfoWindow}
+          >
+            <div>
+              <h1>{this.state.selectedPlace.name}</h1>
+              <p>{this.state.selectedPlace.storeInfo.street_num}</p>
+              <p>{this.state.selectedPlace.storeInfo.street}</p>
+              <p>{this.state.selectedPlace.storeInfo.suite}</p>
+              <p>{this.state.selectedPlace.storeInfo.city}</p>
+              <p>{this.state.selectedPlace.storeInfo.state}</p>
+              <p>{this.state.selectedPlace.storeInfo.zip}</p>
+              <a
+                className="directions"
+                href={`https://www.google.com/maps/dir/?api=1&destination=${directions}`}
+              >
+                Directions
+              </a>
+            </div>
+          </InfoWindow>
+        )}
 
-          {this.state.selectedPlace.user && (
-            <InfoWindow
-              marker={this.state.activeMarker}
-              visible={this.state.showingInfoWindow}
-            >
-              <h1>{this.state.selectedPlace.user}</h1>
-            </InfoWindow>
-          )}
-        </Map>
-      </div>
+        {this.state.selectedPlace.user && (
+          <InfoWindow
+            marker={this.state.activeMarker}
+            visible={this.state.showingInfoWindow}
+          >
+            <h1>{this.state.selectedPlace.user}</h1>
+          </InfoWindow>
+        )}
+      </Map>
     );
   }
 }

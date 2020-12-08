@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-
+import "../styling/Login.css"
 
 const URL = process.env.REACT_APP_DB_URL
 
@@ -36,7 +36,11 @@ class Login extends Component {
     .then((response) => response.json())
     .then((data) => {
       console.log("this is login", data)
-      this.props.handleSuccessfulAuth(data)
+      if (data.error) {
+        return alert("username does not exist, please register") 
+      } 
+        this.props.handleSuccessfulAuth(data)
+      
       
 
     })
@@ -65,7 +69,8 @@ class Login extends Component {
     return (
       <>
         <form onSubmit={this.handleSubmit} className="login-bar">
-          <input
+        
+        <input
             type="username"
             name="username"
             placeholder="Username"
@@ -73,6 +78,8 @@ class Login extends Component {
             onChange={this.handleChange}
             required
           />
+      
+
           <input
             type="password"
             name="password"
@@ -81,8 +88,10 @@ class Login extends Component {
             onChange={this.handleChange}
             required
           />
-
-          <button type="submit">Login</button>
+          
+          
+  <button type="submit" className="login-Button">Login</button>
+         
         </form>
 
       

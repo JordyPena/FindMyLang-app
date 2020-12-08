@@ -14,7 +14,7 @@ class LanguageSelector extends Component {
     return (
       <form className="search-bars">
       
-        <label htmlFor="language">Select a language</label>
+        <label htmlFor="language"><h3 className="select-header">Select a language</h3></label>
         <select
           id="language"
           name="language"

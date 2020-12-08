@@ -1,0 +1,13 @@
+
+.signup-Button {
+  color: black;
+  background-color: #91C4D9;
+}
+
+.signup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 20px;
+}
+

@@ -1,6 +1,13 @@
 .login-bar {
   display: flex;
-  flex-direction: row;
-  justify-content: right;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 20px;
 }
+
+.login-Button {
+  color: #021826;
+  background-color: #91C4D9;
+}
+
 

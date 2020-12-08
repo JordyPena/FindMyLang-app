@@ -7,29 +7,30 @@ function LandingPage() {
     <>
       
       <div className="landingPage-content">
-        <header>
+        <header className="landing-header">
           <h1>LandingPage</h1>
         </header>
 
         <section>
           <div className="welcome">
-            <h3>Welcome</h3>
-            <p>
+            <h3 className="titles">Welcome</h3>
+            <p className="landingPage-p">
               Hi, this app allows you to search for a T-mobile store in the
-              Dallas area with employees who speak the language you select.
+              city of Dallas</p> <p className="landingPage-p">with employees who speak the language you select.
             </p>
           </div>
         </section>
 
         <section>
-          <div>
-            <h3>How to use</h3>
-            <p>
+          <div className="welcome">
+            <h3 className="titles">How to use</h3>
+            <p className="landingPage-p">
               Click on home and 
-              in the dropdown, select the language you require. You will see results that fit your
+              in the dropdown, select the language you require.</p>
+              <p className="landingPage-p"> You will see results that fit your
               criteria.
             </p>
-            <p>
+            <p className="landingPage-p">
               Create an account to save frequented stores to your favorites.
             </p>
           </div>

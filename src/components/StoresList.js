@@ -31,28 +31,32 @@ function StoresList(props) {
       });
   };
   return (
-    <>
+    <div className="store-list">
+        
+
       <section className="results">
+      <h2 className="h3">Results</h2>
         <div className="list">
-          <h3>Results</h3>
+         
           {props.stores.map((store, idx) => {
             return (
-              <div key={idx}>
-                <p>{store.name}</p>
-                <p>{store.street_num}</p>
-                <p>{store.street}</p>
-                <p>{store.suite || ""}</p>
-                <p>
-                  {store.city}, {store.state} {store.zip}
+              <div key={idx} className="store">
+                <h3 className="store-name">{store.name}</h3>
+                <p>&nbsp; {store.street_num}</p>
+                <p>&nbsp; {store.street}</p>
+                <p>&nbsp; {store.suite || ""}</p>
+                <p> 
+                &nbsp; {store.city}, {store.state} {store.zip}
                 </p>
-                <button onClick={() => handleClick(store.id)}>Fav</button>
+                &nbsp; <button onClick={() => handleClick(store.id)}
+                className="fav-button">Fav</button>
               </div>
             );
           })}
         </div>
-        <div className="map">{props.Map}</div>
+        
       </section>
-    </>
+    </div>
   );
 }
 

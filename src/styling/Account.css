@@ -1,14 +1,94 @@
-.favorites {
+
+.list {
+  list-style-type: none;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+
+.fav-style {
+  flex: 1 0 200px;
+  background-color: #245C73;
+  color: rgba(255,255,255, 0.97);
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-bottom: 30px;
+  font-family: Helvetica, sans-serif;
+  border-radius: 20px;
+  display: grid;
+  place-items: center;
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2) 
+}
+
+.delete {
+  width: 20%;
+  place-items: center;
+  color: black;
+  background-color: #91C4D9;
+}
+
+.delete:hover {
+  color: black;
+  background-color: #4B8CA6;
+}
+
+.delete:focus {
+  color: black;
+  background-color: #91C4D9;
+}
+
+
+
+.fav-style button {
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
-.list ul {
-  list-style-type: none;
+
+.logout-style:hover {
+  color: black;
+  background-color: #4B8CA6;
 }
 
-.username p {
-  display: flex;
-  justify-content: center;
+.logout-style:focus {
+  color: black;
+  background-color: #91C4D9;
 }
+
+.fav-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #4B8CA6;
+}
+
+.username {
+  color: #4B8CA6;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.logout-style {
+  color: black;
+  background-color: #91C4D9;
+  padding: 5px;
+  margin: 5px;
+  border-radius: 10%;
+}
+
+.about {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.username-style {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+
