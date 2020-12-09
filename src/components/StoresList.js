@@ -4,9 +4,7 @@ import React from "react";
 const URL = process.env.REACT_APP_DB_URL
 
 function StoresList(props) {
-  //on click handler
-  // than post to favs table
-  // than go to account and do a get to grab the favs for the mathing id of account
+  
   const handleClick = (store_id) => {
     console.log(props);
     let accounts_id = props.user.id;
@@ -37,7 +35,7 @@ function StoresList(props) {
       <section className="results">
       <h2 className="h3">Results</h2>
         <div className="list">
-         
+         {console.log("storeslist props.stores", props.stores)}
           {props.stores.map((store, idx) => {
             return (
               <div key={idx} className="store">

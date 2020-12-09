@@ -1,90 +1,87 @@
 import React, { Component } from "react";
-import {Redirect} from "react-router-dom"
+import { Redirect } from "react-router-dom";
 import "../styling/Account.css";
 
-const URL = process.env.REACT_APP_DB_URL
+const URL = process.env.REACT_APP_DB_URL;
 
-  class Account extends Component {
-    constructor(props) {
-      super(props)
-      this.state = {
-        favorites: []
-      }
+class Account extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      favorites: [],
+    };
+  }
+
+  componentDidMount() {
+    if (!Object.keys(this.props.user).length) {
+      return;
     }
-
-    componentDidMount() {
-      if (!Object.keys(this.props.user).length) {
-        return;
-      }
-      let accounts_id = this.props.user.id
-      fetch(`${URL}/api/accounts/favorite/${accounts_id}`, {
-        method: "GET",
-        headers: {
-          "Content-type": "application/json",
-          Authorization: process.env.REACT_APP_TOKEN,
-        },
-      })
+    let accounts_id = this.props.user.id;
+    fetch(`${URL}/api/accounts/favorite/${accounts_id}`, {
+      method: "GET",
+      headers: {
+        "Content-type": "application/json",
+        Authorization: process.env.REACT_APP_TOKEN,
+      },
+    })
       .then((response) => {
-        return response.json()
+        return response.json();
       })
       .then((favorites) => {
         this.setState({
-          favorites: favorites
-        })
-      })
-    }
+          favorites: favorites,
+        });
+      });
+  }
 
-    handleLogoutClick = () => {
-      this.props.handleLogout();
-      this.props.history.push("/");
-    };
-  
-    
-    handleClick = (favorite_id) => {
-      console.log("line 12 in account", favorite_id)
-      const url = `${URL}/api/accounts/favorite/${favorite_id}`
-      console.log("this is url line 14", url)
-      fetch(`${url}`, {
-        method: "DELETE",
-        headers: {
-          "Content-type": "application/json",
-          Authorization: process.env.REACT_APP_TOKEN,
-        },
-      })
-      .then((response) => {
-        if (response.ok) {
-          const newFavs = this.state.favorites.filter((favorite) => {
-            return favorite.id !== favorite_id
-          })
-          console.log(newFavs)
-          this.setState({
-            favorites: newFavs
-          })
-          this.props.history.push("/account")
-        }
-      })
-    }
-  
+  handleLogoutClick = () => {
+    this.props.handleLogout();
+    this.props.history.push("/");
+  };
 
-    render() {
-      return (
-        <>
-        {!Object.keys(this.props.user).length &&
-        <Redirect to="/"/>}
-          <section className="username-style">
-            <h1 className="username">Hi {this.props.user.username} </h1>
-            <button className="logout-style" onClick={() => this.handleLogoutClick()}>Logout</button>
-          </section>
+  handleClick = (favorite_id) => {
+    console.log("line 12 in account", favorite_id);
+    const url = `${URL}/api/accounts/favorite/${favorite_id}`;
+    console.log("this is url line 14", url);
+    fetch(`${url}`, {
+      method: "DELETE",
+      headers: {
+        "Content-type": "application/json",
+        Authorization: process.env.REACT_APP_TOKEN,
+      },
+    }).then((response) => {
+      if (response.ok) {
+        const newFavs = this.state.favorites.filter((favorite) => {
+          return favorite.id !== favorite_id;
+        });
+        console.log(newFavs);
+        this.setState({
+          favorites: newFavs,
+        });
+        this.props.history.push("/account");
+      }
+    });
+  };
 
-         
-    
-    <h2 className="fav-header">Favorites</h2>
-          <section>
-           
-            <div className="list">
-           
-              <ul>
-                { this.state.favorites && (
+  render() {
+    return (
+      <>
+        {!Object.keys(this.props.user).length && <Redirect to="/" />}
+        <section className="username-style">
+          <h1 className="username">Hi {this.props.user.username} </h1>
+          <button
+            className="logout-style"
+            onClick={() => this.handleLogoutClick()}
+          >
+            Logout
+          </button>
+        </section>
+
+        <h2 className="fav-header">Favorites</h2>
+        <section>
+          <div className="list">
+            <ul>
+              {this.state.favorites &&
                 this.state.favorites.map((favorite, idx) => {
                   return this.props.stores.map((store) => {
                     if (store.id === favorite.store_id)
@@ -98,24 +95,23 @@ const URL = process.env.REACT_APP_DB_URL
                             {store.city}, {store.state} {store.zip}
                           </p>
                           <p>{store.languages}</p>
-                        <button className="delete" onClick={() => this.handleClick(favorite.id)}>Delete</button>
+                          <button
+                            className="delete"
+                            onClick={() => this.handleClick(favorite.id)}
+                          >
+                            Delete
+                          </button>
                         </li>
                       );
                   });
-                }))}
-                {console.log("this is line 35", this.props)}
-              </ul>
-            </div>
-          </section>
-        </>
-      );
-    }
+                })}
+              {console.log("this is line 35", this.props)}
+            </ul>
+          </div>
+        </section>
+      </>
+    );
   }
+}
 
 export default Account;
-
-
-
-
-
-

@@ -10,7 +10,7 @@ export class Geo extends Component {
     super(props);
 
     this.state = {
-      // address: "",
+      
       showingInfoWindow: false,
       activeMarker: {},
       selectedPlace: {},
@@ -88,19 +88,6 @@ export class Geo extends Component {
   handleChange = (address) => {
     this.setState({ address });
   };
-
-  // handleSelect = (address) => {
-  //   geocodeByAddress(address)
-  //     .then((results) => getLatLng(results[0]))
-  //     .then((latLng) => {
-  //       console.log("Success", latLng);
-  //       this.setState({ address });
-  //       this.setState({
-  //         mapCenter: latLng,
-  //       });
-  //     })
-  //     .catch((error) => console.error("Error", error));
-  // };
 
   render() {
     console.log("current position", this.state.currentPos);
