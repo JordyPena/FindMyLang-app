@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import "../styling/Login.css"
+import "../styling/Login.css";
 
-const URL = process.env.REACT_APP_DB_URL
+const URL = process.env.REACT_APP_DB_URL;
 
 class Login extends Component {
   constructor(props) {
@@ -21,10 +21,10 @@ class Login extends Component {
   };
 
   handleSubmit = (event) => {
-    const {username, password} = this.state
-    const data = {username, password}
+    const { username, password } = this.state;
+    const data = { username, password };
     event.preventDefault();
-  
+
     fetch(`${URL}/api/accounts/account`, {
       method: "POST",
       body: JSON.stringify(data),
@@ -33,33 +33,21 @@ class Login extends Component {
         Authorization: process.env.REACT_APP_TOKEN,
       },
     })
-    .then((response) => response.json())
-    .then((data) => {
-      console.log("this is login", data)
-      if (data.error) {
-        return alert("username does not exist, please register") 
-      } 
-      
-        this.props.handleSuccessfulAuth(data)
-      
-      
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.error) {
+          return alert("username does not exist, please register");
+        }
 
-    })
-     
+        this.props.handleSuccessfulAuth(data);
+      });
   };
 
-  
-
-
-
-
   render() {
-    
     return (
       <>
         <form onSubmit={this.handleSubmit} className="login-bar">
-        
-        <input
+          <input
             type="username"
             name="username"
             placeholder="Username"
@@ -67,7 +55,6 @@ class Login extends Component {
             onChange={this.handleChange}
             required
           />
-      
 
           <input
             type="password"
@@ -77,13 +64,11 @@ class Login extends Component {
             onChange={this.handleChange}
             required
           />
-          
-          
-  <button type="submit" className="login-Button">Login</button>
-         
-        </form>
 
-      
+          <button type="submit" className="login-Button">
+            Login
+          </button>
+        </form>
       </>
     );
   }

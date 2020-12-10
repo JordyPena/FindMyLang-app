@@ -1,16 +1,11 @@
 import React, { Component } from "react";
 import { Map, Marker, GoogleApiWrapper, InfoWindow } from "google-maps-react";
-// import {
-//   geocodeByAddress,
-//   getLatLng,
-// } from "react-places-autocomplete";
 
 export class Geo extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      
       showingInfoWindow: false,
       activeMarker: {},
       selectedPlace: {},
@@ -33,15 +28,9 @@ export class Geo extends Component {
 
   componentDidMount() {
     if ("geolocation" in navigator) {
-      console.log("Available");
     } else {
-      console.log("Not Available");
     }
-    navigator.geolocation.getCurrentPosition((position) => {
-      console.log("Latitude is :", position.coords.latitude);
-      console.log("Longitude is :", position.coords.longitude);
-      console.log("complete position", position);
-    });
+    navigator.geolocation.getCurrentPosition((position) => {});
 
     if (process.env.NODE_ENV === "development") {
       this.setState({
@@ -53,11 +42,9 @@ export class Geo extends Component {
       return;
     }
     if (!navigator.geolocation) {
-      console.log("user declined geolocation");
       return;
     }
     navigator.geolocation.getCurrentPosition((position) => {
-      console.log("line 57", position);
       this.setState({
         currentPos: {
           lat: position.coords.latitude,
@@ -68,7 +55,6 @@ export class Geo extends Component {
   }
 
   onMarkerClick = (props, marker, e) => {
-    console.log("this is marker props", props);
     this.setState({
       selectedPlace: props,
       activeMarker: marker,
@@ -90,8 +76,6 @@ export class Geo extends Component {
   };
 
   render() {
-    console.log("current position", this.state.currentPos);
-
     let directions = this.state.selectedPlace.storeInfo;
     if (directions) {
       let {
@@ -104,17 +88,15 @@ export class Geo extends Component {
       } = this.state.selectedPlace.storeInfo;
       directions = `${street_num}, ${street}, ${suite}, ${city}, ${state}, ${zip}`;
       directions = escape(directions);
-
-      console.log("param is", directions);
     }
 
     return (
       <Map
         google={this.props.google}
-        containerStyle={{ 
-          width: "100%", 
-          height: "500px", 
-          position: "relative" 
+        containerStyle={{
+          width: "100%",
+          height: "500px",
+          position: "relative",
         }}
         className={"map"}
         zoom={14}

@@ -3,7 +3,7 @@ import Login from "../components/Login";
 import StoresList from "./StoresList";
 import LanguageSelector from "./LanguageSelector";
 import Signup from "./Signup";
-import Geo from "./Geo"
+import Geo from "./Geo";
 
 function Home(props) {
   const handleSuccessfulAuth = (data) => {
@@ -14,7 +14,6 @@ function Home(props) {
   return (
     <>
       <h3>isLoggedIn: {props.isLoggedIn ? "true" : "false"}</h3>
-      
 
       <LanguageSelector
         setLanguage={props.setLanguage}
@@ -30,17 +29,16 @@ function Home(props) {
         />
       )}
 
-      
+      {props.isLoggedIn ? null : (
+        <Signup handleSuccessfulAuth={handleSuccessfulAuth} />
+      )}
 
-
-
-      {props.isLoggedIn ? null
-      : (<Signup handleSuccessfulAuth={handleSuccessfulAuth} />)}
-
-  <Geo stores={props.stores}/>
-<StoresList stores={props.stores} user={props.user} language={props.language}/>
-
-      
+      <Geo stores={props.stores} />
+      <StoresList
+        stores={props.stores}
+        user={props.user}
+        language={props.language}
+      />
     </>
   );
 }

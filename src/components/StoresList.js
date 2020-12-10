@@ -1,14 +1,12 @@
 import "../styling/Results.css";
 import React from "react";
 
-const URL = process.env.REACT_APP_DB_URL
+const URL = process.env.REACT_APP_DB_URL;
 
 function StoresList(props) {
-  
   const handleClick = (store_id) => {
-    console.log(props);
     let accounts_id = props.user.id;
-    console.log(accounts_id);
+
     let data = { accounts_id, store_id };
     if (accounts_id === undefined) {
       alert("Create an account to add a favorite");
@@ -24,18 +22,13 @@ function StoresList(props) {
       },
     })
       .then((response) => response.json())
-      .then((data) => {
-        console.log("this is fav post", data);
-      });
+      .then((data) => {});
   };
   return (
     <div className="store-list">
-        
-
       <section className="results">
-      <h2 className="h3">Results</h2>
+        <h2 className="h3">Results</h2>
         <div className="list">
-         {console.log("storeslist props.stores", props.stores)}
           {props.stores.map((store, idx) => {
             return (
               <div key={idx} className="store">
@@ -43,16 +36,20 @@ function StoresList(props) {
                 <p>&nbsp; {store.street_num}</p>
                 <p>&nbsp; {store.street}</p>
                 <p>&nbsp; {store.suite || ""}</p>
-                <p> 
-                &nbsp; {store.city}, {store.state} {store.zip}
+                <p>
+                  &nbsp; {store.city}, {store.state} {store.zip}
                 </p>
-                &nbsp; <button onClick={() => handleClick(store.id)}
-                className="fav-button">Fav</button>
+                &nbsp;{" "}
+                <button
+                  onClick={() => handleClick(store.id)}
+                  className="fav-button"
+                >
+                  Fav
+                </button>
               </div>
             );
           })}
         </div>
-        
       </section>
     </div>
   );

@@ -4,14 +4,13 @@ import LandingPage from "./components/LandingPage";
 import Nav from "./components/Nav";
 import Footer from "./components/Footer";
 import About from "./components/About";
-import "./index.css"
-
+import "./index.css";
 
 import Account from "./components/Account";
 
 import Home from "./components/Home";
 
-const URL = process.env.REACT_APP_DB_URL
+const URL = process.env.REACT_APP_DB_URL;
 
 class App extends Component {
   constructor(props) {
@@ -27,10 +26,7 @@ class App extends Component {
     };
   }
 
-  /////get stores by language
   componentDidMount() {
-    
-    console.log("in fetch", URL)
     fetch(`${URL}/api/stores`, {
       method: "GET",
       headers: {
@@ -38,10 +34,15 @@ class App extends Component {
         Authorization: process.env.REACT_APP_TOKEN,
       },
     })
-      .then((response)=> response.json())
-    
+      .then((response) => response.json())
+
       .then((data) => {
-        console.log("this is data", data)
+        //grab every store
+        //get the language of each store
+        //remove white space
+        //breakdown each set of strings into individual strings
+        //grab each individual string
+        //add it into langs array
         let langs = [];
         data.forEach((store) => {
           store.languages
@@ -52,7 +53,7 @@ class App extends Component {
             });
         });
         langs = [...new Set(langs)];
-        console.log("lang is", langs);
+
         this.setState({
           stores: data,
           languages: langs,
@@ -67,7 +68,6 @@ class App extends Component {
     this.setState({
       language: language,
     });
-    console.log("selected language is", language);
   };
 
   handleLogin = (data, favorites) => {
@@ -84,77 +84,55 @@ class App extends Component {
     });
   };
 
-  
-
-  
-
- 
   render() {
-     
-    let stores = this.state.stores
+    let stores = this.state.stores;
     if (this.state.language !== "All") {
       stores = stores.filter((store) => {
-           return store.languages.includes(this.state.language);
-         })
+        return store.languages.includes(this.state.language);
+      });
     }
     return (
       <>
-        <Nav user={this.state.user}/>
+        <Nav user={this.state.user} />
         <main className="container">
+          <Route
+            exact
+            path="/"
+            render={(props) => {
+              return (
+                <Home
+                  {...props}
+                  stores={stores}
+                  setLanguage={this.setLanguage}
+                  languages={this.state.languages}
+                  isLoggedIn={this.state.isLoggedIn}
+                  handleLogin={this.handleLogin}
+                  user={this.state.user}
+                  language={this.state.language}
+                />
+              );
+            }}
+          />
 
-       
-        <Route
-          exact
-          path="/"
-          render={(props) => {
-            console.log("this is line 74", this.state);
-            return (
-              <Home
-                {...props}
-                stores={stores}
-               
-                setLanguage={this.setLanguage}
-                languages={this.state.languages}
-                isLoggedIn={this.state.isLoggedIn}
-                handleLogin={this.handleLogin}
-                user={this.state.user}
-                language={this.state.language}
-              />
-            );
-          }}
-        />
+          <Route exact path="/about" component={About} />
 
-       
-        <Route exact path="/about" component={About} />
-        
+          <Route
+            path="/account"
+            render={(props) => {
+              return (
+                <Account
+                  {...props}
+                  user={this.state.user}
+                  handleLogout={this.handleLogout}
+                  stores={this.state.stores}
+                />
+              );
+            }}
+          />
 
-
-        
-
-        <Route
-          path="/account"
-          render={(props) => {
-            return (
-              <Account
-                {...props}
-                user={this.state.user}
-                handleLogout={this.handleLogout}
-              
-                stores={this.state.stores}
-               
-              />
-            );
-          }}
-        />
-       
-
-        
-
-       
-        <Route exact path="/landingpage" component={LandingPage}/>
-       
+          <Route exact path="/landingpage" component={LandingPage} />
         </main>
-        <Footer/>
+        <Footer />
       </>
     );
   }

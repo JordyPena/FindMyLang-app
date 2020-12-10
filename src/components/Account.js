@@ -40,9 +40,8 @@ class Account extends Component {
   };
 
   handleClick = (favorite_id) => {
-    console.log("line 12 in account", favorite_id);
     const url = `${URL}/api/accounts/favorite/${favorite_id}`;
-    console.log("this is url line 14", url);
+
     fetch(`${url}`, {
       method: "DELETE",
       headers: {
@@ -54,7 +53,7 @@ class Account extends Component {
         const newFavs = this.state.favorites.filter((favorite) => {
           return favorite.id !== favorite_id;
         });
-        console.log(newFavs);
+
         this.setState({
           favorites: newFavs,
         });
@@ -105,7 +104,6 @@ class Account extends Component {
                       );
                   });
                 })}
-              {console.log("this is line 35", this.props)}
             </ul>
           </div>
         </section>

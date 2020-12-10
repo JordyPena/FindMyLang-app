@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import "../styling/Signup.css"
+import "../styling/Signup.css";
 
-const URL = process.env.REACT_APP_DB_URL
+const URL = process.env.REACT_APP_DB_URL;
 
 class Signup extends Component {
   constructor(props) {
@@ -22,8 +22,8 @@ class Signup extends Component {
   };
 
   handleSubmit = (event) => {
-    const {username, password} = this.state
-    const data = {username, password}
+    const { username, password } = this.state;
+    const data = { username, password };
     event.preventDefault();
     fetch(`${URL}/api/accounts`, {
       method: "POST",
@@ -33,38 +33,28 @@ class Signup extends Component {
         Authorization: process.env.REACT_APP_TOKEN,
       },
     })
-    .then((response) => {
-      console.log("this is response", response)
-      if (response.status === 401) {
-        console.log("something")
-        alert('user already exist')
-        throw new Error('401 error')
-      }
-      if (response.status === 400) {
-        console.log("400")
-        throw new Error('400 error')
-      }
-        return response.json()
-    })
-    .then((data) => {
-      console.log("this is registration", data)
-      this.props.handleSuccessfulAuth(data)
-    })
-     .catch((err) => {
-      console.error(err)
-     })
+      .then((response) => {
+        if (response.status === 401) {
+          alert("user already exist");
+          throw new Error("401 error");
+        }
+        if (response.status === 400) {
+          throw new Error("400 error");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        this.props.handleSuccessfulAuth(data);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   };
-
-
-
-
-
 
   render() {
     return (
       <>
         <form onSubmit={this.handleSubmit} className="signup">
-      
           <input
             type="username"
             name="username"
@@ -91,10 +81,10 @@ class Signup extends Component {
             required
           />
 
-          <button type="submit" className="signup-Button">Register</button>
+          <button type="submit" className="signup-Button">
+            Register
+          </button>
         </form>
-
-      
       </>
     );
   }
