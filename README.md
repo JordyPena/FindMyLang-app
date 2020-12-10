@@ -1,7 +1,8 @@
 # Getting Started with Create React App
 
 
-![Screenshot](https://github.com/JordyPena/Portfolio-flexbox/blob/master/images/project-screenshots/Workout-app-screenshot.PNG?raw=true)
+![Screenshot](https://github.com/JordyPena/Portfolio/blob/main/images/project-screenshots/findmylang-app-screenshot.png)
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
