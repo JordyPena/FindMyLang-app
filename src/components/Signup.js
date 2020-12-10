@@ -33,15 +33,26 @@ class Signup extends Component {
         Authorization: process.env.REACT_APP_TOKEN,
       },
     })
-    .then((response) => response.json())
+    .then((response) => {
+      console.log("this is response", response)
+      if (response.status === 401) {
+        console.log("something")
+        alert('user already exist')
+        throw new Error('401 error')
+      }
+      if (response.status === 400) {
+        console.log("400")
+        throw new Error('400 error')
+      }
+        return response.json()
+    })
     .then((data) => {
       console.log("this is registration", data)
-      if (data.error) return alert("username already exist")
-      if (!data.username &&
-      !data.password)
       this.props.handleSuccessfulAuth(data)
     })
-     
+     .catch((err) => {
+      console.error(err)
+     })
   };
 
 
