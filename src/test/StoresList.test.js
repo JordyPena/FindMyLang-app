@@ -14,10 +14,13 @@ street_num: "2947",
 suite: "400",
 zip: "75227"}]
 
-it('renders without crashing', () => {
-  const div = document.createElement('div')
-
-  ReactDOM.render(<StoresList stores={stores}/>, div);
-
-  ReactDOM.unmountComponentAtNode(div)
+describe('StoresList component', () => {
+  
+  it('StoresList renders without crashing', () => {
+    const div = document.createElement('div')
+  
+    ReactDOM.render(<StoresList stores={stores}/>, div);
+  
+    ReactDOM.unmountComponentAtNode(div)
+  })
 })
