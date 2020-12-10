@@ -38,4 +38,8 @@ POST /api/accounts/account logs into account, req.body needs username and passwo
 
 GET  /api/accounts/favorite/:accounts_id returns all favorites in account, req.params needs accounts_id
 
+<<<<<<< HEAD
 POST /api/accounts/favorite creates a new favorite in current account, req.body needs accounts_id and store_id
+=======
+POST /api/accounts/favorite creates a new favorite in current account, req.body needs accounts_id and store_id
+>>>>>>> 029be957a9163856abbee8e2f6ea9f0265fcd438
