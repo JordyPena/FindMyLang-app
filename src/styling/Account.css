@@ -1,15 +1,13 @@
-
 .list {
   list-style-type: none;
   display: flex;
   flex-wrap: wrap;
 }
 
-
 .fav-style {
   flex: 1 0 200px;
-  background-color: #245C73;
-  color: rgba(255,255,255, 0.97);
+  background-color: #245c73;
+  color: rgba(255, 255, 255, 0.97);
   padding-top: 10px;
   padding-bottom: 10px;
   margin-bottom: 30px;
@@ -17,28 +15,26 @@
   border-radius: 20px;
   display: grid;
   place-items: center;
-  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2) 
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
 }
 
 .delete {
   width: 40%;
   place-items: center;
   color: black;
-  background-color: #91C4D9;
+  background-color: #91c4d9;
   border-radius: 10px;
 }
 
 .delete:hover {
   color: black;
-  background-color: #4B8CA6;
+  background-color: #4b8ca6;
 }
 
 .delete:focus {
   color: black;
-  background-color: #91C4D9;
+  background-color: #91c4d9;
 }
-
-
 
 .fav-style button {
   display: flex;
@@ -46,26 +42,25 @@
   justify-content: center;
 }
 
-
 .logout-style:hover {
   color: black;
-  background-color: #4B8CA6;
+  background-color: #4b8ca6;
 }
 
 .logout-style:focus {
   color: black;
-  background-color: #91C4D9;
+  background-color: #91c4d9;
 }
 
 .fav-header {
   display: flex;
   flex-direction: column;
   align-items: center;
-  color: #4B8CA6;
+  color: #4b8ca6;
 }
 
 .username {
-  color: #4B8CA6;
+  color: #4b8ca6;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -73,7 +68,7 @@
 
 .logout-style {
   color: black;
-  background-color: #91C4D9;
+  background-color: #91c4d9;
   padding: 5px;
   margin: 5px;
   border-radius: 10px;
@@ -90,6 +85,3 @@
   flex-direction: column;
   align-items: center;
 }
-
-
-

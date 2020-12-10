@@ -1,4 +1,3 @@
-
 .Nav {
   display: flex;
   flex-direction: column;
@@ -8,16 +7,16 @@
 .link-style {
   display: flex;
   justify-content: space-evenly;
-  background-color: #0A3140;
+  background-color: #0a3140;
   width: 100%;
 }
-.link-style, a{
-  color: #91C4D9;
-  
+.link-style,
+a {
+  color: #91c4d9;
 }
 
 .background-img {
-  background: url("../images/city.jpg") top center ;
+  background: url("../images/city.jpg") top center;
   width: 100%;
   height: 300px;
   background-size: cover;
