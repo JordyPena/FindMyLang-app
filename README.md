@@ -26,20 +26,16 @@ FindMyLang API fetches all the stores in the database, all of the accounts creat
 
 Endpoints: 
 
-GET /api/stores returns all stores
+GET /api/stores  returns all stores
 
-GET /api/stores/store returns stores that match the language selected
+GET /api/stores/store  returns stores that match the language selected
 
-GET /api/accounts returns returns all accounts
+GET /api/accounts  returns returns all accounts
 
-POST /api/accounts creates a new account, req.body needs username and password
+POST /api/accounts  creates a new account, req.body needs username and password
 
-POST /api/accounts/account logs into account, req.body needs username and password
+POST /api/accounts/  account logs into account, req.body needs username and password
 
-GET  /api/accounts/favorite/:accounts_id returns all favorites in account, req.params needs accounts_id
+GET  /api/accounts/favorite/  accounts_id returns all favorites in account, req.params needs accounts_id
 
-<<<<<<< HEAD
-POST /api/accounts/favorite creates a new favorite in current account, req.body needs accounts_id and store_id
-=======
-POST /api/accounts/favorite creates a new favorite in current account, req.body needs accounts_id and store_id
->>>>>>> 029be957a9163856abbee8e2f6ea9f0265fcd438
+POST /api/accounts/favorite  creates a new favorite in current account, req.body needs accounts_id and store_id
