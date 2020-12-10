@@ -1,7 +1,7 @@
 # Getting Started with Create React App
 
-view-source:https://github.com/JordyPena/FindMyLang-app/settings
 
+![Screenshot](https://github.com/JordyPena/Portfolio-flexbox/blob/master/images/project-screenshots/Workout-app-screenshot.PNG?raw=true)
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
