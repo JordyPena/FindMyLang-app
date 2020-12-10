@@ -39,6 +39,7 @@ class Login extends Component {
       if (data.error) {
         return alert("username does not exist, please register") 
       } 
+      
         this.props.handleSuccessfulAuth(data)
       
       
