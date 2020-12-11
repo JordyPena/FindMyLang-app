@@ -13,7 +13,7 @@ function Home(props) {
 
   return (
     <>
-      <p>{props.isLoggedIn ? "" : "Logged out"}</p>
+      
 
       <LanguageSelector
         setLanguage={props.setLanguage}

@@ -12,6 +12,7 @@ class Signup extends Component {
       password: "",
       password_confirmation: "",
       registrationErrors: "",
+      modal: false
     };
   }
 
@@ -20,6 +21,19 @@ class Signup extends Component {
       [event.target.name]: event.target.value,
     });
   };
+
+  hideModal = (event) => {
+    event.preventDefault();
+    this.setState({
+      modal: false,
+    });
+  };
+
+  showModal = () => {
+    this.setState({
+      modal: true
+    })
+  }
 
   handleSubmit = (event) => {
     const { username, password } = this.state;
@@ -35,25 +49,44 @@ class Signup extends Component {
     })
       .then((response) => {
         if (response.status === 401) {
-          alert("user already exist");
-          throw new Error("401 error");
+          
+          throw new Error("User already exist");
         }
         if (response.status === 400) {
-          throw new Error("400 error");
+          
+          throw new Error("Fill out all inputs");
         }
         return response.json();
-      })
+      }) 
       .then((data) => {
         this.props.handleSuccessfulAuth(data);
       })
       .catch((err) => {
+        this.showModal(err.message)
         console.error(err);
       });
   };
 
   render() {
+    const modal = (
+      <div className="modal-container">
+        <form className="modal" onSubmit={this.hideModal}>
+        <p>Username doesn't exist please register</p>
+        <button
+          className="modal-button"
+          type="submit"
+        >
+          Okay
+        </button>
+      </form>
+      </div>
+      
+    );
     return (
       <>
+
+        {this.state.modal ? modal : ""}
+
         <form onSubmit={this.handleSubmit} className="signup">
           <input
             type="username"

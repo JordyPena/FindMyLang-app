@@ -8,9 +8,10 @@ class Login extends Component {
     super(props);
 
     this.state = {
-      username: "",
-      password: "",
+      username: "demo",
+      password: "1111",
       loginErrors: "",
+      modal: false,
     };
   }
 
@@ -19,6 +20,19 @@ class Login extends Component {
       [event.target.name]: event.target.value,
     });
   };
+
+  hideModal = (event) => {
+    event.preventDefault();
+    this.setState({
+      modal: false,
+    });
+  };
+
+  showModal = () => {
+    this.setState({
+      modal: true
+    })
+  }
 
   handleSubmit = (event) => {
     const { username, password } = this.state;
@@ -36,16 +50,39 @@ class Login extends Component {
       .then((response) => response.json())
       .then((data) => {
         if (data.error) {
-          return alert("username does not exist, please register");
+          this.showModal()
+        } else {
+
+          this.props.handleSuccessfulAuth(data);
         }
 
-        this.props.handleSuccessfulAuth(data);
-      });
+        
+
+      })
+      .catch((err) => {
+        console.log(err)
+      })
   };
 
   render() {
+    const modal = (
+      <div className="modal-container">
+        <form className="modal" onSubmit={this.hideModal}>
+        <p>Username doesn't exist please register</p>
+        <button
+          className="modal-button"
+          type="submit"
+        >
+          Okay
+        </button>
+      </form>
+      </div>
+      
+    );
     return (
       <>
+        {this.state.modal ? modal : ""}
+
         <form onSubmit={this.handleSubmit} className="login-bar">
           <input
             type="username"
@@ -55,6 +92,7 @@ class Login extends Component {
             onChange={this.handleChange}
             required
           />
+          <p className="demo">demo username: demo</p>
 
           <input
             type="password"
@@ -64,6 +102,7 @@ class Login extends Component {
             onChange={this.handleChange}
             required
           />
+          <p className="demo">demo password: 1111</p>
 
           <button type="submit" className="login-Button">
             Login
