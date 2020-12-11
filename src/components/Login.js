@@ -92,7 +92,7 @@ class Login extends Component {
             onChange={this.handleChange}
             required
           />
-          <p className="demo">demo username: demo</p>
+         
 
           <input
             type="password"
@@ -102,7 +102,7 @@ class Login extends Component {
             onChange={this.handleChange}
             required
           />
-          <p className="demo">demo password: 1111</p>
+         
 
           <button type="submit" className="login-Button">
             Login
