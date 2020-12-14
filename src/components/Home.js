@@ -4,6 +4,7 @@ import StoresList from "./StoresList";
 import LanguageSelector from "./LanguageSelector";
 import Signup from "./Signup";
 import Geo from "./Geo";
+import FavoritesContext from "./FavoritesContext";
 
 function Home(props) {
   const handleSuccessfulAuth = (data) => {
@@ -12,10 +13,11 @@ function Home(props) {
   };
 
   return (
-    <>
-      
-
-      <LanguageSelector
+    <FavoritesContext.Consumer>
+      { (context) => {
+        return(
+          <div>
+            <LanguageSelector
         setLanguage={props.setLanguage}
         languages={props.languages}
       />
@@ -38,8 +40,13 @@ function Home(props) {
         stores={props.stores}
         user={props.user}
         language={props.language}
+        HomeFavs={context.HomeFavs}
       />
-    </>
+          </div>
+        )
+      }}
+      
+    </FavoritesContext.Consumer>
   );
 }
 
