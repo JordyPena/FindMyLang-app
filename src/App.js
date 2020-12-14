@@ -23,6 +23,7 @@ class App extends Component {
       languages: [],
       isLoggedIn: false,
       user: {},
+      favorites: [],
     };
   }
 
@@ -61,6 +62,31 @@ class App extends Component {
       })
       .catch((error) => {
         console.error({ error });
+      }); 
+  }
+
+  setFavorites = () => {
+    if (!Object.keys(this.state.user).length) {
+      return;
+    }
+    let accounts_id = this.state.user.id;
+    fetch(`${URL}/api/accounts/favorite/${accounts_id}`, {
+      method: "GET",
+      headers: {
+        "Content-type": "application/json",
+        Authorization: process.env.REACT_APP_TOKEN,
+      },
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((favorites) => {
+        console.log("favs in fetch on login", favorites)
+        this.setState({
+          
+          favorites: favorites,
+        });
+        
       });
   }
 
@@ -70,11 +96,11 @@ class App extends Component {
     });
   };
 
-  handleLogin = (data, favorites) => {
+  handleLogin = (data) => {
     this.setState({
       isLoggedIn: true,
-      user: data,
-    });
+          user: data,
+    })
   };
 
   handleLogout = () => {
@@ -109,6 +135,7 @@ class App extends Component {
                   handleLogin={this.handleLogin}
                   user={this.state.user}
                   language={this.state.language}
+                  favorites={this.state.favorites}
                 />
               );
             }}
@@ -125,6 +152,7 @@ class App extends Component {
                   user={this.state.user}
                   handleLogout={this.handleLogout}
                   stores={this.state.stores}
+                  favorites={this.state.favorites}
                 />
               );
             }}

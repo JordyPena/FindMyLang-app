@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
 import "../styling/Account.css";
-import FavoritesContext from "./FavoritesContext"
 
 
 const URL = process.env.REACT_APP_DB_URL;
@@ -10,31 +9,11 @@ class Account extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      favorites: [],
+      favorites: this.props.favorites,
     };
   }
-  componentDidMount() {
-    if (!Object.keys(this.props.user).length) {
-      return;
-    }
-    let accounts_id = this.props.user.id;
-    fetch(`${URL}/api/accounts/favorite/${accounts_id}`, {
-      method: "GET",
-      headers: {
-        "Content-type": "application/json",
-        Authorization: process.env.REACT_APP_TOKEN,
-      },
-    })
-      .then((response) => {
-        return response.json();
-      })
-      .then((favorites) => {
-        this.setState({
-          favorites: favorites,
-        });
-      });
-  }
-
+ 
+  
 
 
   handleLogoutClick = () => {
@@ -65,20 +44,12 @@ class Account extends Component {
     });
   };
 
-  HomeFavs = (Favorites) => {
-    this.setState({
-      favorites: Favorites
-    })
-  }
+  
   
   render() {
-    const ContextValues= {favorites: this.state.favorites,
-    HomeFavs: this.HomeFavs}
-    
+    console.log("favorites in account", this.state.favorites)
     return (
-      <FavoritesContext.Provider value={
-        ContextValues
-      }>
+      <>
         {!Object.keys(this.props.user).length && <Redirect to="/" />}
         <section className="username-style">
           <h1 className="username">Hi {this.props.user.username} </h1>
@@ -121,7 +92,7 @@ class Account extends Component {
             </ul>
           </div>
         </section>
-      </FavoritesContext.Provider>
+      </>
     );
   }
 }

@@ -54,9 +54,7 @@ class Login extends Component {
         } else {
 
           this.props.handleSuccessfulAuth(data);
-        }
-
-        
+        }       
 
       })
       .catch((err) => {
