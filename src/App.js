@@ -62,7 +62,7 @@ class App extends Component {
       })
       .catch((error) => {
         console.error({ error });
-      }); 
+      });
   }
 
   getUserFavorites = (userData) => {
@@ -81,36 +81,30 @@ class App extends Component {
         return response.json();
       })
       .then((favorites) => {
-        console.log("favs in fetch on login", favorites)
         this.setState({
-          
           favorites: favorites,
         });
-        
       });
-
-  }
+  };
 
   deleteFavorite = (favorite_id) => {
-    
-        this.setState((prevState) => {
-          const newFavs = prevState.favorites.filter((favorite) => {
-            console.log("fav being deleted", favorite)
-            return favorite.id !== favorite_id;
-          }); 
-          return {
-            favorites: newFavs,
-          }
-        })
-  }
+    this.setState((prevState) => {
+      const newFavs = prevState.favorites.filter((favorite) => {
+        return favorite.id !== favorite_id;
+      });
+      return {
+        favorites: newFavs,
+      };
+    });
+  };
 
   addFavorite = (data) => {
     this.setState((prevState) => {
       return {
-        favorites: [...prevState.favorites, data]
-      }
-    })
-  }
+        favorites: [...prevState.favorites, data],
+      };
+    });
+  };
 
   setLanguage = (language) => {
     this.setState({
@@ -121,9 +115,9 @@ class App extends Component {
   handleLogin = (data) => {
     this.setState({
       isLoggedIn: true,
-          user: data,
-    })
-    this.getUserFavorites(data)
+      user: data,
+    });
+    this.getUserFavorites(data);
   };
 
   handleLogout = () => {
