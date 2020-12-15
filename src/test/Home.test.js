@@ -21,17 +21,35 @@ street: "S Buckner Blvd",
 street_num: "2947",
 suite: "400",
 zip: "75227"}]
+const favorites = [{
+  id: 68,
+  accounts_id: 1,
+  store_id: 19
+}, {
+  id: 96,
+  accounts_id: 1,
+  store_id: 1
+}]
+const getUserFavorites = () => {}
+const addFavorite = () => {}
+const handleLogin = () => {}
 
 describe('Home component', () => {
   
   it('Home renders without crashing', () => {
     const div = document.createElement('div')
   
-    ReactDOM.render(<Home languages={languages} setLanguage={setLanguage}
-      handleSuccessfulAuth={handleSuccessfulAuth}
-      user={user}
+    ReactDOM.render(<Home
       stores={stores}
-      language={language}/>, div);
+      setLanguage={setLanguage}
+      languages={languages}
+      isLoggedIn={isLoggedIn}
+      handleLogin={handleLogin}
+      user={user}
+      language={language}
+      favorites={favorites}
+      getUserFavorites={getUserFavorites}
+      addFavorite={addFavorite}/>, div);
   
     ReactDOM.unmountComponentAtNode(div)
   })
