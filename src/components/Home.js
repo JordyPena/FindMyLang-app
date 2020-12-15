@@ -9,8 +9,6 @@ function Home(props) {
   const handleSuccessfulAuth = (data) => {
     props.handleLogin(data);
     props.history.push("/account");
-console.log("data in auth", data)
-   
   };
 
   return (
@@ -39,6 +37,8 @@ console.log("data in auth", data)
         user={props.user}
         language={props.language}
         favorites={props.favorites}
+        getUserFavorites={props.getUserFavorites}
+        addFavorite={props.addFavorite}
       />
     </>
   );

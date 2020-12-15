@@ -2,19 +2,12 @@ import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
 import "../styling/Account.css";
 
-
 const URL = process.env.REACT_APP_DB_URL;
 
 class Account extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      favorites: this.props.favorites,
-    };
   }
- 
-  
-
 
   handleLogoutClick = () => {
     this.props.handleLogout();
@@ -32,22 +25,12 @@ class Account extends Component {
       },
     }).then((response) => {
       if (response.ok) {
-        const newFavs = this.state.favorites.filter((favorite) => {
-          return favorite.id !== favorite_id;
-        });
-
-        this.setState({
-          favorites: newFavs,
-        });
-        this.props.history.push("/account");
+        this.props.deleteFavorite(favorite_id);
       }
     });
   };
 
-  
-  
   render() {
-    console.log("favorites in account", this.state.favorites)
     return (
       <>
         {!Object.keys(this.props.user).length && <Redirect to="/" />}
@@ -65,8 +48,8 @@ class Account extends Component {
         <section>
           <div className="list">
             <ul>
-              {this.state.favorites &&
-                this.state.favorites.map((favorite, idx) => {
+              {this.props.favorites &&
+                this.props.favorites.map((favorite, idx) => {
                   return this.props.stores.map((store) => {
                     if (store.id === favorite.store_id)
                       return (

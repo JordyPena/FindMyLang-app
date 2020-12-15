@@ -12,8 +12,10 @@
   display: flex;
   align-items: center;
   flex-direction: column;
+  padding-bottom: 10px;
 }
 
 .select-header {
   color: #4b8ca6;
+  margin: 0;
 }

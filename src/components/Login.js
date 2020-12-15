@@ -30,9 +30,9 @@ class Login extends Component {
 
   showModal = () => {
     this.setState({
-      modal: true
-    })
-  }
+      modal: true,
+    });
+  };
 
   handleSubmit = (event) => {
     const { username, password } = this.state;
@@ -50,32 +50,26 @@ class Login extends Component {
       .then((response) => response.json())
       .then((data) => {
         if (data.error) {
-          this.showModal()
+          this.showModal();
         } else {
-
           this.props.handleSuccessfulAuth(data);
-        }       
-
+        }
       })
       .catch((err) => {
-        console.log(err)
-      })
+        console.log(err);
+      });
   };
 
   render() {
     const modal = (
       <div className="modal-container">
         <form className="modal" onSubmit={this.hideModal}>
-        <p>Username doesn't exist please register</p>
-        <button
-          className="modal-button"
-          type="submit"
-        >
-          Okay
-        </button>
-      </form>
+          <p>Username doesn't exist please register</p>
+          <button className="modal-button" type="submit">
+            Okay
+          </button>
+        </form>
       </div>
-      
     );
     return (
       <>
@@ -90,7 +84,6 @@ class Login extends Component {
             onChange={this.handleChange}
             required
           />
-         
 
           <input
             type="password"
@@ -100,7 +93,6 @@ class Login extends Component {
             onChange={this.handleChange}
             required
           />
-         
 
           <button type="submit" className="login-Button">
             Login

@@ -89,3 +89,29 @@ p {
     flex-direction: row;
   }
 }
+
+.favModal {
+  width: 300px;
+  color: #245c73;
+  background: white;
+  position: relative;
+  z-index: 3;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.7);
+}
+
+.favModal-button {
+  color: #021826;
+  background-color: #91c4d9;
+}
+
+.favModal-container {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 50;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.7);
+}

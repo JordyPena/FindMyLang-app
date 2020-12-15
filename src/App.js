@@ -65,8 +65,8 @@ class App extends Component {
       }); 
   }
 
-  setFavorites = () => {
-    if (!Object.keys(this.state.user).length) {
+  getUserFavorites = (userData) => {
+    if (!Object.keys(userData).length) {
       return;
     }
     let accounts_id = this.state.user.id;
@@ -88,6 +88,28 @@ class App extends Component {
         });
         
       });
+
+  }
+
+  deleteFavorite = (favorite_id) => {
+    
+        this.setState((prevState) => {
+          const newFavs = prevState.favorites.filter((favorite) => {
+            console.log("fav being deleted", favorite)
+            return favorite.id !== favorite_id;
+          }); 
+          return {
+            favorites: newFavs,
+          }
+        })
+  }
+
+  addFavorite = (data) => {
+    this.setState((prevState) => {
+      return {
+        favorites: [...prevState.favorites, data]
+      }
+    })
   }
 
   setLanguage = (language) => {
@@ -101,6 +123,7 @@ class App extends Component {
       isLoggedIn: true,
           user: data,
     })
+    this.getUserFavorites(data)
   };
 
   handleLogout = () => {
@@ -136,6 +159,8 @@ class App extends Component {
                   user={this.state.user}
                   language={this.state.language}
                   favorites={this.state.favorites}
+                  getUserFavorites={this.getUserFavorites}
+                  addFavorite={this.addFavorite}
                 />
               );
             }}
@@ -153,6 +178,8 @@ class App extends Component {
                   handleLogout={this.handleLogout}
                   stores={this.state.stores}
                   favorites={this.state.favorites}
+                  getUserFavorites={this.getUserFavorites}
+                  deleteFavorite={this.deleteFavorite}
                 />
               );
             }}
