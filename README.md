@@ -8,7 +8,7 @@ https://find-my-lang-app.vercel.app/
 
 ## Summary
 
-FindMyLang allows the you to find T-mobile store's in Dallas, TX that have
+FindMyLang allows you to find T-mobile store's in Dallas, TX that have
 representatives that speak the language you selected. Once a language is selected
 you can see your current location compared to the stores that match your request
 on a map. Click on the markers on the map for store details and a link to get directions from your current location. You can create an account in order to be
