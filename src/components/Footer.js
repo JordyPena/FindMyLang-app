@@ -26,7 +26,7 @@ function Footer() {
           />
         </a>
 
-        <a className="folio" href="https://jordypena.github.io/Portfolio/">
+        <a className="folio" href="https://jordypena.com/">
           Portfolio
         </a>
       </footer>
